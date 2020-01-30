@@ -23,6 +23,12 @@ public class Game extends JFrame {
         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
         this.everyThing.add(topEdge);
         this.walls.add(topEdge);
+        Wall rightEdge = new Wall(480, 20, Game.HEIGHT, true);
+        this.everyThing.add(rightEdge);
+        this.walls.add(rightEdge);
+        Wall bottomEdge = new Wall(20, 480, Game.WIDTH, false);
+        this.everyThing.add(bottomEdge);
+        this.walls.add(bottomEdge);
         // other walls
         this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
