@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends JFrame {
-    final static int WIDTH = 500, HEIGHT = 500;
+    final static int WIDTH = 600, HEIGHT = 600;
 
     List<Thing> everyThing = new ArrayList<>();
     List<Wall> walls = new ArrayList<>();
@@ -17,16 +17,16 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-        Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
         this.everyThing.add(leftEdge);
         this.walls.add(leftEdge);
-        Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
+        Wall topEdge = new Wall(0, 20, Game.WIDTH, false);
         this.everyThing.add(topEdge);
         this.walls.add(topEdge);
-        Wall rightEdge = new Wall(480, 20, Game.HEIGHT, true);
+        Wall rightEdge = new Wall(600, 0, Game.HEIGHT, true);
         this.everyThing.add(rightEdge);
         this.walls.add(rightEdge);
-        Wall bottomEdge = new Wall(20, 480, Game.WIDTH, false);
+        Wall bottomEdge = new Wall(0, 600, Game.WIDTH, false);
         this.everyThing.add(bottomEdge);
         this.walls.add(bottomEdge);
         // other walls
