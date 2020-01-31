@@ -58,7 +58,11 @@ public class Game extends JFrame {
         if (listener.p1Right)
             p1Tank.turnRight();
         if (listener.p1Fire) {
-            this.shotsInTheAir.add(new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection()));
+            Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
+            this.shotsInTheAir.add(shotP1);
+            this.everyThing.add(shotP1); ////////////
+            shotP1.step();
+
         }
         if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
             p2Tank.step();
@@ -68,7 +72,10 @@ public class Game extends JFrame {
         if (listener.p2Right)
             p2Tank.turnRight();
         if (listener.p2Fire) {
-            this.shotsInTheAir.add(new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection()));
+            Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
+            this.shotsInTheAir.add(shotP2);
+            this.everyThing.add(shotP2);
+            shotP2.step();
         }
     }
 

@@ -8,7 +8,7 @@ public class Tank extends MovingThing {
     final static int GUN_LENGTH = 30;
 
     Tank(int x, int y, float direction) {
-        super(x, y, 2f, 06f, direction);
+        super(x, y, direction, 06f, (float) 0.1);
     }
 
     public void draw(Graphics graphics) {

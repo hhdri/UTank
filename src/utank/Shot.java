@@ -9,12 +9,13 @@ public class Shot extends MovingThing {
     int age = Shot.LIFE;
 
     Shot(int x, int y, float direction) {
-        super(x, y, 3, 0, direction);
+        super(x, y, direction, 03f, (float) 0.01);
     }
 
     void draw(Graphics graphics) {
-        graphics.fillOval(this.x - Shot.RADIUS, this.y - Shot.RADIUS,
-                Shot.RADIUS * 2, Shot.RADIUS * 2);
+        /*graphics.drawLine(this.x - Shot.RADIUS, this.y - Shot.RADIUS,
+                Shot.RADIUS * 2, Shot.RADIUS * 2);*/
+        graphics.drawLine(this.x, this.y, (int) Math.round(this.x + (Shot.RADIUS * Math.sin(this.direction))), (int) Math.round(this.y + (Shot.RADIUS * Math.cos(this.direction))));
     }
 
     void growOld() {
@@ -26,7 +27,7 @@ public class Shot extends MovingThing {
     }
 
     void bounceAgainst(Wall wall) {
-        this.direction = (wall.isVertical? 0 : Math.PI) - this.direction;
+        this.direction = (wall.isVertical ? 0 : Math.PI) - this.direction;
     }
 
     @Override
