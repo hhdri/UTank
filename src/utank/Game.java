@@ -17,9 +17,9 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
-         this.everyThing.add(leftEdge);
-         this.walls.add(leftEdge);
+//         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+//         this.everyThing.add(leftEdge);
+//         this.walls.add(leftEdge);
 //         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
 //         this.everyThing.add(topEdge);
 //         this.walls.add(topEdge);
@@ -47,8 +47,9 @@ public class Game extends JFrame {
         Tank p2Tank = (Tank) this.player2.getTank();
         for (Shot shot : this.shotsInTheAir) {
             for (Wall wall : this.walls) {
-                if (wall.contacts(shot))
+                if (wall.contacts(shot)) {
                     shot.bounceAgainst(wall);
+                }
                 shot.step();
             }
             if (p1Tank.contacts(shot)) {
