@@ -17,19 +17,25 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-//        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
-//        this.everyThing.add(leftEdge);
-//        this.walls.add(leftEdge);
-//        Wall topEdge = new Wall(0, 0, Game.WIDTH, false);
-//        this.everyThing.add(topEdge);
-//        this.walls.add(topEdge);
-//        Wall rightEdge = new Wall(500, 0, Game.HEIGHT, true);
-//        this.everyThing.add(rightEdge);
-//        this.walls.add(rightEdge);
-//        Wall bottomEdge = new Wall(0, 500, Game.WIDTH, false);
-//        this.everyThing.add(bottomEdge);
-//        this.walls.add(bottomEdge);
-//        // other walls
+//         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+//         this.everyThing.add(leftEdge);
+//         this.walls.add(leftEdge);
+//         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
+//         this.everyThing.add(topEdge);
+//         this.walls.add(topEdge);
+//         // other walls
+        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
+        this.everyThing.add(leftEdge);
+        this.walls.add(leftEdge);
+        Wall topEdge = new Wall(0, 20, Game.WIDTH, false);
+        this.everyThing.add(topEdge);
+        this.walls.add(topEdge);
+        Wall rightEdge = new Wall(600, 0, Game.HEIGHT, true);
+        this.everyThing.add(rightEdge);
+        this.walls.add(rightEdge);
+        Wall bottomEdge = new Wall(0, 600, Game.WIDTH, false);
+        this.everyThing.add(bottomEdge);
+        this.walls.add(bottomEdge);
         this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         this.everyThing.add(player1.getTank());
@@ -64,7 +70,11 @@ public class Game extends JFrame {
         if (listener.p1Right)
             p1Tank.turnRight();
         if (listener.p1Fire) {
-            this.shotsInTheAir.add(new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection()));
+            Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
+            this.shotsInTheAir.add(shotP1);
+            this.everyThing.add(shotP1); ////////////
+            shotP1.step();
+
         }
         if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
             p2Tank.step();
@@ -74,7 +84,10 @@ public class Game extends JFrame {
         if (listener.p2Right)
             p2Tank.turnRight();
         if (listener.p2Fire) {
-            this.shotsInTheAir.add(new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection()));
+            Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
+            this.shotsInTheAir.add(shotP2);
+            this.everyThing.add(shotP2);
+            shotP2.step();
         }
     }
 
