@@ -17,9 +17,9 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-//         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
-//         this.everyThing.add(leftEdge);
-//         this.walls.add(leftEdge);
+         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+         this.everyThing.add(leftEdge);
+         this.walls.add(leftEdge);
 //         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
 //         this.everyThing.add(topEdge);
 //         this.walls.add(topEdge);
