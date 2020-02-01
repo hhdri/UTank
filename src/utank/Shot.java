@@ -36,7 +36,7 @@ public class Shot extends MovingThing {
     }
 
     boolean contacts(MovingThing moving) {
-        // TODO implement this
+
         return false;
     }
 }

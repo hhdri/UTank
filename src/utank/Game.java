@@ -54,9 +54,15 @@ public class Game extends JFrame {
             }
             if (p1Tank.contacts(shot)) {
                 this.everyThing.remove(p1Tank);
+
                 // ... code to handle new round
             }
-            // ... same for player2
+            else if(p2Tank.contacts(shot)){
+                this.everyThing.remove(p2Tank);
+            }
+            else{
+                shot.step();
+            }
         }
         this.shotsInTheAir.forEach(Shot::growOld);
         this.shotsInTheAir.removeIf(Shot::isDead);
