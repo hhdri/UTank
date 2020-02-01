@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends JFrame {
-    final static int WIDTH = 600, HEIGHT = 600;
+    final static int WIDTH = 500, HEIGHT = 500;
 
     List<Thing> everyThing = new ArrayList<>();
     List<Wall> walls = new ArrayList<>();
@@ -17,19 +17,19 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
-        this.everyThing.add(leftEdge);
-        this.walls.add(leftEdge);
-        Wall topEdge = new Wall(0, 20, Game.WIDTH, false);
-        this.everyThing.add(topEdge);
-        this.walls.add(topEdge);
-        Wall rightEdge = new Wall(600, 0, Game.HEIGHT, true);
-        this.everyThing.add(rightEdge);
-        this.walls.add(rightEdge);
-        Wall bottomEdge = new Wall(0, 600, Game.WIDTH, false);
-        this.everyThing.add(bottomEdge);
-        this.walls.add(bottomEdge);
-        // other walls
+//        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
+//        this.everyThing.add(leftEdge);
+//        this.walls.add(leftEdge);
+//        Wall topEdge = new Wall(0, 0, Game.WIDTH, false);
+//        this.everyThing.add(topEdge);
+//        this.walls.add(topEdge);
+//        Wall rightEdge = new Wall(500, 0, Game.HEIGHT, true);
+//        this.everyThing.add(rightEdge);
+//        this.walls.add(rightEdge);
+//        Wall bottomEdge = new Wall(0, 500, Game.WIDTH, false);
+//        this.everyThing.add(bottomEdge);
+//        this.walls.add(bottomEdge);
+//        // other walls
         this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         this.everyThing.add(player1.getTank());
