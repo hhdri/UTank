@@ -6,7 +6,8 @@ import java.util.Map;
 public class Tank extends MovingThing {
     final static int RADIUS = 25;
     final static int GUN_LENGTH = 30;
-
+    int shotCounter = 100;
+    int shotTimer = 0;
     Tank(int x, int y, float direction) {
         super(x, y, direction, 2, (float) 0.03);
     }

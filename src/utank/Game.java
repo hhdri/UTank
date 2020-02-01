@@ -45,6 +45,12 @@ public class Game extends JFrame {
     public void updateState() {
         Tank p1Tank = (Tank) this.player1.getTank();
         Tank p2Tank = (Tank) this.player2.getTank();
+        if(p1Tank.shotTimer != 0){
+            p1Tank.shotTimer -= 1;
+        }
+        if(p2Tank.shotTimer != 0){
+            p2Tank.shotTimer -= 1;
+        }
         for (Shot shot : this.shotsInTheAir) {
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
@@ -89,11 +95,13 @@ public class Game extends JFrame {
             p1Tank.turnLeft();
         if (listener.p1Right)
             p1Tank.turnRight();
-        if (listener.p1Fire) {
+        if (listener.p1Fire && p1Tank.shotCounter != 0 && p1Tank.shotTimer == 0) {
             Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
             this.shotsInTheAir.add(shotP1);
-            this.everyThing.add(shotP1); ////////////
+            this.everyThing.add(shotP1);
             shotP1.step();
+            p1Tank.shotCounter -= 1;
+            p1Tank.shotTimer = 50;
 
         }
         if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
@@ -103,11 +111,13 @@ public class Game extends JFrame {
             p2Tank.turnLeft();
         if (listener.p2Right)
             p2Tank.turnRight();
-        if (listener.p2Fire) {
+        if (listener.p2Fire && p2Tank.shotCounter != 0 && p2Tank.shotTimer == 0) {
             Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
             this.shotsInTheAir.add(shotP2);
             this.everyThing.add(shotP2);
             shotP2.step();
+            p2Tank.shotCounter -= 1;
+            p2Tank.shotTimer = 50;
         }
     }
 
