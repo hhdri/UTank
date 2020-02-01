@@ -58,11 +58,11 @@ public class GameActionListener extends KeyAdapter {
             case KeyEvent.VK_D:
                 this.p2Right = false;
                 break;
-            case KeyEvent.VK_W:
-                this.p2Move = false;
-                break;
             case KeyEvent.VK_S:
                 this.p2Fire = false;
+                break;
+            case KeyEvent.VK_W:
+                this.p2Move = false;
                 break;
         }
         e.consume();

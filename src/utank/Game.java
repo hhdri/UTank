@@ -94,7 +94,6 @@ public class Game extends JFrame {
             this.shotsInTheAir.add(shotP1);
             this.everyThing.add(shotP1); ////////////
             shotP1.step();
-            shotP1.growOld();
 
         }
         if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
@@ -111,7 +110,6 @@ public class Game extends JFrame {
             shotP2.step();
         }
     }
-
 
     public void paint(Graphics graphics) {
         super.paint(graphics);
