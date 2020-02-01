@@ -2,6 +2,8 @@ package utank;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +15,14 @@ public class Game extends JFrame {
     Player player1 = new Player();
     Player player2 = new Player();
     List<Shot> shotsInTheAir = new ArrayList<>();
+    static int winPoint = 3;
 
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
-         this.everyThing.add(leftEdge);
-         this.walls.add(leftEdge);
+        Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+        this.everyThing.add(leftEdge);
+        this.walls.add(leftEdge);
 //         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
 //         this.everyThing.add(topEdge);
 //         this.walls.add(topEdge);
@@ -42,6 +45,29 @@ public class Game extends JFrame {
         this.everyThing.add(player2.getTank());
     }
 
+    public void newRoundHandler(Player player1, Player player2) {
+        if (player1.getPoints() == winPoint) {
+            JOptionPane.showMessageDialog(this, "Player1 won!");
+            this.dispose();
+        } else if (player2.getPoints() == winPoint) {
+            JButton newGameButton = new JButton("New Game");
+            this.add(newGameButton);
+            newGameButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Game newGame = new Game();
+                    newGame.setVisible(true);
+                }
+            });
+            JOptionPane.showMessageDialog(this, "Player2 won!");
+            this.dispose();
+
+        } else
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getPoints() + " Player 2 : " + player2.getPoints());
+
+
+    }
+
     public void updateState() {
         Tank p1Tank = (Tank) this.player1.getTank();
         Tank p2Tank = (Tank) this.player2.getTank();
@@ -53,10 +79,13 @@ public class Game extends JFrame {
                 shot.step();
             }
             if (p1Tank.contacts(shot)) {
+
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
                 this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.newRoundHandler(player1, player2);
+
                 this.everyThing.add(player1.getTank());
                 this.everyThing.add(player2.getTank());
                 // ... code to handle new round
@@ -66,6 +95,7 @@ public class Game extends JFrame {
                 this.everyThing.remove(p1Tank);
                 this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.newRoundHandler(player1, player2);
                 this.everyThing.add(player1.getTank());
                 this.everyThing.add(player2.getTank());
                 // code to handle new round

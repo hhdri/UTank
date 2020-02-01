@@ -10,6 +10,10 @@ public class Player {
         this.tank = new Tank(startX, startY, 0);
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     Thing getTank() {
         return this.tank;
     }
