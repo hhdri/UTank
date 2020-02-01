@@ -17,9 +17,9 @@ public class Game extends JFrame {
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-//         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
-//         this.everyThing.add(leftEdge);
-//         this.walls.add(leftEdge);
+         Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+         this.everyThing.add(leftEdge);
+         this.walls.add(leftEdge);
 //         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
 //         this.everyThing.add(topEdge);
 //         this.walls.add(topEdge);
@@ -49,17 +49,26 @@ public class Game extends JFrame {
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot))
                     shot.bounceAgainst(wall);
-                else
-                    shot.step();
+                shot.step();
             }
             if (p1Tank.contacts(shot)) {
                 this.everyThing.remove(p1Tank);
                 // ... code to handle new round
             }
-            // ... same for player2
+            if (p2Tank.contacts(shot)) {
+                this.everyThing.remove(p2Tank);
+                // code to handle new round
+            }
         }
         this.shotsInTheAir.forEach(Shot::growOld);
-        this.shotsInTheAir.removeIf(Shot::isDead);
+        List<Shot> tempShotsInTheAir = new ArrayList<>(shotsInTheAir);
+        for (Shot shot : tempShotsInTheAir) {
+            if (shot.isDead()) {
+                this.shotsInTheAir.remove(shot);
+                this.everyThing.remove(shot);
+            }
+        }
+
 
         GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
         if (listener.p1Move && this.walls.stream().noneMatch(wall -> wall.contacts(p1Tank))) {
