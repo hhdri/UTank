@@ -7,8 +7,7 @@ public class Player {
     void newRound(boolean hasWon, int startX, int startY) {
         if (hasWon)
             this.points = this.points + 1;
-        else
-            this.tank = new Tank(startX, startY, 0);
+        this.tank = new Tank(startX, startY, 0);
     }
 
     Thing getTank() {

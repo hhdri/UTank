@@ -54,10 +54,20 @@ public class Game extends JFrame {
             }
             if (p1Tank.contacts(shot)) {
                 this.everyThing.remove(p1Tank);
+                this.everyThing.remove(p2Tank);
+                this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.everyThing.add(player1.getTank());
+                this.everyThing.add(player2.getTank());
                 // ... code to handle new round
             }
             if (p2Tank.contacts(shot)) {
                 this.everyThing.remove(p2Tank);
+                this.everyThing.remove(p1Tank);
+                this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.everyThing.add(player1.getTank());
+                this.everyThing.add(player2.getTank());
                 // code to handle new round
             }
         }
