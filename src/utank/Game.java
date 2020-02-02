@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class Game extends JFrame {
@@ -87,48 +89,40 @@ public class Game extends JFrame {
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
                     shot.bounceAgainst(wall);
-                }
-                shot.step();
+                } else
+                    shot.step();
             }
             if (p1Tank.contacts(shot)) {
 
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
-                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-                int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
-                this.player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
+                this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.newRoundHandler(player1, player2);
-
-                this.everyThing.add(player1.getTank());
-                this.everyThing.add(player2.getTank());
-                // ... code to handle new round
+                shotsInTheAir.clear();  // this mutates the iterator
+                break;  // so can't use this loop anymore (and we don't need to)
             }
             if (p2Tank.contacts(shot)) {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
-                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-                int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
-                this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
+                this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.newRoundHandler(player1, player2);
-                this.everyThing.add(player1.getTank());
-                this.everyThing.add(player2.getTank());
-                // code to handle new round
+                shotsInTheAir.clear();
+                break;
             }
         }
         this.shotsInTheAir.forEach(Shot::growOld);
-        List<Shot> tempShotsInTheAir = new ArrayList<>(shotsInTheAir);
-        for (Shot shot : tempShotsInTheAir) {
-            if (shot.isDead()) {
-                this.shotsInTheAir.remove(shot);
-                this.everyThing.remove(shot);
-            }
-        }
+        this.shotsInTheAir.removeIf(Shot::isDead);
 
 
         GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
-        if (listener.p1Move && this.walls.stream().noneMatch(wall -> wall.contacts(p1Tank))) {
+        if (listener.p1Move) {
+            for (Wall wall : walls)
+                if (wall.contacts(p1Tank)) {
+                    p1Tank.blockedBy(wall);
+                    break;
+                }
             p1Tank.step();
         }
         if (listener.p1Left)
@@ -138,12 +132,16 @@ public class Game extends JFrame {
         if (listener.p1Fire && p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
             Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
             this.shotsInTheAir.add(shotP1);
-            this.everyThing.add(shotP1); ////////////
-            shotP1.step();
+            listener.p1Fire = false;
             p1Tank.shotCounter -= 1;
             p1Tank.shotTimer = 50;
         }
-        if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
+        if (listener.p2Move) {
+            for (Wall wall : walls)
+                if (wall.contacts(p2Tank)) {
+                    p2Tank.blockedBy(wall);
+                    break;
+                }
             p2Tank.step();
         }
         if (listener.p2Left)
@@ -153,8 +151,7 @@ public class Game extends JFrame {
         if (listener.p2Fire && p2Tank.shotTimer == 0 && p2Tank.shotCounter != 0) {
             Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
             this.shotsInTheAir.add(shotP2);
-            this.everyThing.add(shotP2);
-            shotP2.step();
+            listener.p2Fire = false;
             p2Tank.shotCounter -= 1;
             p2Tank.shotTimer = 50;
         }
@@ -163,6 +160,7 @@ public class Game extends JFrame {
     public void paint(Graphics graphics) {
         super.paint(graphics);
         this.everyThing.forEach(thing -> thing.draw(graphics));
+        this.shotsInTheAir.forEach(shot -> shot.draw(graphics));
         Toolkit.getDefaultToolkit().sync();
     }
 }
