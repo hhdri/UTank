@@ -24,9 +24,9 @@ public class Player {
                     hasContactWithTank = true;
                 }
             }
-            else if(everything.get(i) instanceof Shot){
-                System.out.println("shot");
-            }
+//            else if(everything.get(i) instanceof Shot){
+//                System.out.println("shot");
+//            }
             else {
                 int[] props = {((Wall)everything.get(i)).i1, ((Wall)everything.get(i)).i2,
                         ((Wall)everything.get(i)).j, ((Wall)everything.get(i)).WIDTH};
