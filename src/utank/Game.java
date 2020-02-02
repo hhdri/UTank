@@ -96,9 +96,11 @@ public class Game extends JFrame {
 
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
-                this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-                this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
+                int[] coordinatesP2 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();  // this mutates the iterator
@@ -107,9 +109,11 @@ public class Game extends JFrame {
             if (p2Tank.contacts(shot)) {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
-                this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-                this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
+                int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();
