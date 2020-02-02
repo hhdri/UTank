@@ -32,6 +32,7 @@ public class Game extends JFrame {
         Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
         this.everyThing.add(bottomEdge);
         this.walls.add(bottomEdge);
+
         int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
         this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
