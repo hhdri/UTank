@@ -5,44 +5,34 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class Game extends JFrame {
-    final static int WIDTH = 500, HEIGHT = 500;
+    private final static int WIDTH = 500, HEIGHT = 500;
+    private static int WIN_POINT = 3;
 
-    List<Thing> everyThing = new ArrayList<>();
-    List<Wall> walls = new ArrayList<>();
-    Player player1 = new Player();
-    Player player2 = new Player();
-    List<Shot> shotsInTheAir = new ArrayList<>();
-    static int winPoint = 3;
+    private List<Thing> everyThing = new ArrayList<>();
+    private List<Wall> walls = new ArrayList<>();
+    private Player player1 = new Player();
+    private Player player2 = new Player();
+    private List<Shot> shotsInTheAir = new ArrayList<>();
 
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
-        Wall leftEdge = new Wall(20, 20, Game.HEIGHT, true);
+        Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
         this.everyThing.add(leftEdge);
         this.walls.add(leftEdge);
-//         Wall topEdge = new Wall(20, 20, Game.WIDTH, false);
-//         this.everyThing.add(topEdge);
-//         this.walls.add(topEdge);
-//         // other walls
-//        Wall leftEdge = new Wall(0, 0, Game.HEIGHT, true);
-//        this.everyThing.add(leftEdge);
-//        this.walls.add(leftEdge);
-//        Wall topEdge = new Wall(0, 20, Game.WIDTH, false);
-//        this.everyThing.add(topEdge);
-//        this.walls.add(topEdge);
-//        Wall rightEdge = new Wall(600, 0, Game.HEIGHT, true);
-//        this.everyThing.add(rightEdge);
-//        this.walls.add(rightEdge);
-//        Wall bottomEdge = new Wall(0, 600, Game.WIDTH, false);
-//        this.everyThing.add(bottomEdge);
-//        this.walls.add(bottomEdge);
-//        this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-//        this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+        Wall topEdge = new Wall(20, 45, Game.WIDTH - 40, false);
+        this.everyThing.add(topEdge);
+        this.walls.add(topEdge);
+        Wall rightEdge = new Wall(Game.WIDTH - 20, 45, Game.HEIGHT - 65, true);
+        this.everyThing.add(rightEdge);
+        this.walls.add(rightEdge);
+        Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
+        this.everyThing.add(bottomEdge);
+        this.walls.add(bottomEdge);
+
         int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
         this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
@@ -51,11 +41,11 @@ public class Game extends JFrame {
         this.everyThing.add(player2.getTank());
     }
 
-    public void newRoundHandler(Player player1, Player player2) {
-        if (player1.getPoints() == winPoint) {
+    private void newRoundHandler(Player player1, Player player2) {
+        if (player1.getPoints() == WIN_POINT) {
             JOptionPane.showMessageDialog(this, "Player1 won!");
             this.dispose();
-        } else if (player2.getPoints() == winPoint) {
+        } else if (player2.getPoints() == WIN_POINT) {
             JButton newGameButton = new JButton("New Game");
             this.add(newGameButton);
             newGameButton.addActionListener(new ActionListener() {
