@@ -109,7 +109,12 @@ public class Game extends JFrame {
 
 
         GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
-        if (listener.p1Move && this.walls.stream().noneMatch(wall -> wall.contacts(p1Tank))) {
+        if (listener.p1Move) {
+            for (Wall wall : walls)
+                if (wall.contacts(p1Tank)) {
+                    p1Tank.blockedBy(wall);
+                    break;
+                }
             p1Tank.step();
         }
         if (listener.p1Left)
@@ -121,7 +126,12 @@ public class Game extends JFrame {
             this.shotsInTheAir.add(shotP1);
             listener.p1Fire = false;
         }
-        if (listener.p2Move && this.walls.stream().noneMatch(wall -> wall.contacts(p2Tank))) {
+        if (listener.p2Move) {
+            for (Wall wall : walls)
+                if (wall.contacts(p2Tank)) {
+                    p2Tank.blockedBy(wall);
+                    break;
+                }
             p2Tank.step();
         }
         if (listener.p2Left)
