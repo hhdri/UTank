@@ -41,9 +41,11 @@ public class Game extends JFrame {
 //        this.walls.add(bottomEdge);
 //        this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
 //        this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-        this.player1.newRound(false, player1.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player1.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
+        int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+        this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
-        this.player2.newRound(false, player2.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player2.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
+        int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+        this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
         this.everyThing.add(player2.getTank());
     }
 
@@ -92,8 +94,10 @@ public class Game extends JFrame {
 
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
-                this.player1.newRound(false, player1.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player1.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
-                this.player2.newRound(true, player2.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player2.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
+                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+                int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
+                this.player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
                 this.newRoundHandler(player1, player2);
 
                 this.everyThing.add(player1.getTank());
@@ -103,8 +107,10 @@ public class Game extends JFrame {
             if (p2Tank.contacts(shot)) {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
-                this.player1.newRound(true, player1.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player1.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
-                this.player2.newRound(false, player2.getCoordinates(everyThing, WIDTH, HEIGHT)[0], player2.getCoordinates(everyThing, WIDTH, HEIGHT)[1]);
+                int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+                int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+                this.player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
+                this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
                 this.newRoundHandler(player1, player2);
                 this.everyThing.add(player1.getTank());
                 this.everyThing.add(player2.getTank());
