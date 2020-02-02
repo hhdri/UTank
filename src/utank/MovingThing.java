@@ -47,6 +47,16 @@ public abstract class MovingThing extends Thing{
         }
     }
 
+    void blockedBy(Tank tank) {
+        this.vX = tank.y - this.y;
+        this.vY = this.x - tank.x;
+
+        double scale = Math.sqrt(this.vX * this.vX + this.vY * this.vY) / 3;
+
+        this.vX /= scale;
+        this.vY /= scale;
+    }
+
     public double getDirection() {
         return direction;
     }

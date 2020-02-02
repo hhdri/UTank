@@ -36,6 +36,9 @@ public class Tank extends MovingThing {
     }
 
     boolean contacts(MovingThing moving) {
-        return ((moving.x - this.x)*(moving.x - this.x)+(moving.y - this.y)*(moving.y - this.y) <= (this.RADIUS + moving.getRadius())*this.RADIUS + moving.getRadius() );
+        int delta_x = moving.x - this.x;
+        int delta_y = moving.y - this.y;
+        double distance = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        return distance < this.RADIUS + moving.getRadius();
     }
 }

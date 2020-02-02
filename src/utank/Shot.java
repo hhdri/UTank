@@ -9,7 +9,7 @@ public class Shot extends MovingThing {
     int age;
 
     Shot(int x, int y, float direction) {
-        super(x, y, direction, 1, (float) 0.01);
+        super(x, y, direction, (float) 1, (float) 0.01);
         age = Shot.LIFE;
     }
 

@@ -109,12 +109,18 @@ public class Game extends JFrame {
                 break;
             }
         }
+
         this.shotsInTheAir.forEach(Shot::growOld);
         this.shotsInTheAir.removeIf(Shot::isDead);
 
 
         GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
         if (listener.p1Move) {
+            if (p1Tank.contacts(p2Tank)) {
+                p1Tank.blockedBy(p2Tank);
+                p2Tank.blockedBy(p1Tank);
+                p1Tank.step();
+            }
             for (Wall wall : walls)
                 if (wall.contacts(p1Tank)) {
                     p1Tank.blockedBy(wall);
@@ -133,6 +139,11 @@ public class Game extends JFrame {
             p1Tank.shotTimer = 50;
         }
         if (listener.p2Move) {
+            if (p1Tank.contacts(p2Tank)) {
+                p1Tank.blockedBy(p2Tank);
+                p2Tank.blockedBy(p1Tank);
+                p2Tank.step();
+            }
             for (Wall wall : walls)
                 if (wall.contacts(p2Tank)) {
                     p2Tank.blockedBy(wall);
