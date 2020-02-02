@@ -6,7 +6,7 @@ public abstract class MovingThing extends Thing{
     int vX, vY;
     float angularVelocity; // rad/step
 
-    public MovingThing(int x, int y, double direction, float velocity, float angularVelocity) {
+    MovingThing(int x, int y, double direction, float velocity, float angularVelocity) {
         super(x, y);
         this.direction = direction;
         this.velocity = velocity;
@@ -27,7 +27,7 @@ public abstract class MovingThing extends Thing{
         this.changeDirection(-this.angularVelocity);
     }
 
-    private void calculateVelocity() {
+    void calculateVelocity() {
         this.vX = (int) Math.round(this.velocity * Math.sin(this.direction));
         this.vY = (int) Math.round(this.velocity * Math.cos(this.direction));
     }

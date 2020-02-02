@@ -83,7 +83,6 @@ public class Game extends JFrame {
                     shot.step();
             }
             if (p1Tank.contacts(shot)) {
-
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
@@ -119,7 +118,6 @@ public class Game extends JFrame {
             for (Wall wall : walls)
                 if (wall.contacts(p1Tank)) {
                     p1Tank.blockedBy(wall);
-                    break;
                 }
             p1Tank.step();
         }
@@ -138,7 +136,6 @@ public class Game extends JFrame {
             for (Wall wall : walls)
                 if (wall.contacts(p2Tank)) {
                     p2Tank.blockedBy(wall);
-                    break;
                 }
             p2Tank.step();
         }

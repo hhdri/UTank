@@ -27,6 +27,7 @@ public class Shot extends MovingThing {
 
     void bounceAgainst(Wall wall) {
         this.direction = (wall.isVertical ? 0 : Math.PI) - this.direction;
+        this.calculateVelocity();
     }
 
     @Override
