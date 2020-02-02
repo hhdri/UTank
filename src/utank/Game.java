@@ -98,6 +98,8 @@ public class Game extends JFrame {
                 this.everyThing.remove(p2Tank);
                 this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.everyThing.add(player1.getTank());
+                this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();  // this mutates the iterator
                 break;  // so can't use this loop anymore (and we don't need to)
@@ -107,6 +109,8 @@ public class Game extends JFrame {
                 this.everyThing.remove(p1Tank);
                 this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+                this.everyThing.add(player1.getTank());
+                this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();
                 break;
