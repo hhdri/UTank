@@ -5,19 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
+    private static int WIN_POINT = 3;
 
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
     private Player player1 = new Player();
     private Player player2 = new Player();
     private List<Shot> shotsInTheAir = new ArrayList<>();
-    private static int winPoint = 3;
 
     public Game() {
         this.setSize(Game.WIDTH, Game.HEIGHT);
@@ -34,8 +32,6 @@ public class Game extends JFrame {
         Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
         this.everyThing.add(bottomEdge);
         this.walls.add(bottomEdge);
-//        this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-//        this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
         int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
         this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
@@ -45,10 +41,10 @@ public class Game extends JFrame {
     }
 
     private void newRoundHandler(Player player1, Player player2) {
-        if (player1.getPoints() == winPoint) {
+        if (player1.getPoints() == WIN_POINT) {
             JOptionPane.showMessageDialog(this, "Player1 won!");
             this.dispose();
-        } else if (player2.getPoints() == winPoint) {
+        } else if (player2.getPoints() == WIN_POINT) {
             JButton newGameButton = new JButton("New Game");
             this.add(newGameButton);
             newGameButton.addActionListener(new ActionListener() {
