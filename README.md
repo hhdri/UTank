@@ -1,2 +1,2 @@
 # UTank
-sinabasiri2000 : correct top & left walls and add bottom & right walls
+It's out final project of the "Advanced Programming" course!
