@@ -41,9 +41,13 @@ public class Game extends JFrame {
 //        Wall bottomEdge = new Wall(0, 600, Game.WIDTH, false);
 //        this.everyThing.add(bottomEdge);
 //        this.walls.add(bottomEdge);
-        this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-        this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+//        this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+//        this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
+        int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+        this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
+        int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+        this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
         this.everyThing.add(player2.getTank());
     }
 
@@ -73,6 +77,14 @@ public class Game extends JFrame {
     public void updateState() {
         Tank p1Tank = (Tank) this.player1.getTank();
         Tank p2Tank = (Tank) this.player2.getTank();
+
+        if(p1Tank.shotTimer != 0){
+            p1Tank.shotTimer -= 1;
+        }
+        if(p2Tank.shotTimer != 0){
+            p2Tank.shotTimer -= 1;
+        }
+
         for (Shot shot : this.shotsInTheAir) {
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
@@ -86,8 +98,6 @@ public class Game extends JFrame {
                 this.everyThing.remove(p2Tank);
                 this.player1.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-                this.everyThing.add(player1.getTank());
-                this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();  // this mutates the iterator
                 break;  // so can't use this loop anymore (and we don't need to)
@@ -97,8 +107,6 @@ public class Game extends JFrame {
                 this.everyThing.remove(p1Tank);
                 this.player1.newRound(true, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
                 this.player2.newRound(false, (int) Math.round(Math.random() * Game.WIDTH), (int) Math.round(Math.random() * Game.HEIGHT));
-                this.everyThing.add(player1.getTank());
-                this.everyThing.add(player2.getTank());
                 this.newRoundHandler(player1, player2);
                 shotsInTheAir.clear();
                 break;
@@ -121,10 +129,12 @@ public class Game extends JFrame {
             p1Tank.turnLeft();
         if (listener.p1Right)
             p1Tank.turnRight();
-        if (listener.p1Fire) {
+        if (listener.p1Fire && p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
             Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
             this.shotsInTheAir.add(shotP1);
             listener.p1Fire = false;
+            p1Tank.shotCounter -= 1;
+            p1Tank.shotTimer = 50;
         }
         if (listener.p2Move) {
             for (Wall wall : walls)
@@ -138,10 +148,12 @@ public class Game extends JFrame {
             p2Tank.turnLeft();
         if (listener.p2Right)
             p2Tank.turnRight();
-        if (listener.p2Fire) {
+        if (listener.p2Fire && p2Tank.shotTimer == 0 && p2Tank.shotCounter != 0) {
             Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
             this.shotsInTheAir.add(shotP2);
             listener.p2Fire = false;
+            p2Tank.shotCounter -= 1;
+            p2Tank.shotTimer = 50;
         }
     }
 
