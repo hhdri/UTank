@@ -41,6 +41,10 @@ public class Game extends JFrame {
         this.everyThing.add(player2.getTank());
     }
 
+    private void newRoundHandler2(Player player1, Player player2) {
+        JOptionPane.showMessageDialog(this, " Equal !");
+    }
+
     private void newRoundHandler(Player player1, Player player2) {
         if (player1.getPoints() == winPoint) {
             JOptionPane.showMessageDialog(this, player1.getName()+ " won!");
@@ -61,8 +65,6 @@ public class Game extends JFrame {
 
         } else
             JOptionPane.showMessageDialog(this, "New Round! " + player1.getName() + " " + player1.getPoints() + " " + player2.getName() + " " + player2.getPoints());
-
-
     }
 
     public void updateState(Player player1, Player player2) {
@@ -109,6 +111,19 @@ public class Game extends JFrame {
                 shotsInTheAir.clear();
                 break;
             }
+
+        }
+        if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty() ) {
+            this.everyThing.remove(p2Tank);
+            this.everyThing.remove(p1Tank);
+            int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+            player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
+            this.everyThing.add(player1.getTank());
+            int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+            player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
+            this.everyThing.add(player2.getTank());
+            this.newRoundHandler2(player1, player2);
+            shotsInTheAir.clear();
         }
 
         this.shotsInTheAir.forEach(Shot::growOld);
