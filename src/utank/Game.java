@@ -190,7 +190,7 @@ public class Game extends JFrame {
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         } else
-            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + "   Player2 : " + player2.getName() + " " + player2.getPoints());
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
 
 
     }
