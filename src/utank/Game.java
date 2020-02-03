@@ -10,6 +10,7 @@ import java.util.List;
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
     private static int WIN_POINT = 3;
+    private int map;
 
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
@@ -17,7 +18,7 @@ public class Game extends JFrame {
     //private Player player2 = new Player();
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
-    public Game(Player player1, Player player2, int winPoint) {
+    public Game(Player player1, Player player2, int winPoint, int map) {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
@@ -33,7 +34,7 @@ public class Game extends JFrame {
         this.everyThing.add(bottomEdge);
         this.walls.add(bottomEdge);
 
-        switch (map){
+        switch (map) {
             case 0:
                 break;
             case 1:
@@ -66,7 +67,7 @@ public class Game extends JFrame {
                 Wall obstacle21 = new Wall(100, 100, 300, false);
                 Wall obstacle22 = new Wall(400, 100, 200, true);
                 Wall obstacle23 = new Wall(150, 200, 200, true);
-                Wall obstacle24 = new Wall(150, 400, 250,false);
+                Wall obstacle24 = new Wall(150, 400, 250, false);
                 Wall obstacle25 = new Wall(250, 230, 50, false);
                 Wall obstacle26 = new Wall(300, 230, 50, true);
                 Wall obstacle27 = new Wall(250, 230, 50, true);
@@ -164,7 +165,8 @@ public class Game extends JFrame {
     private void newRoundHandler2(Player player1, Player player2) {
         JOptionPane.showMessageDialog(this, " Equal !");
     }
-    private void newRoundHandler(Player player1, Player player2, int winPoint) {
+
+    private void newRoundHandler(Player player1, Player player2, int winPoint, int map) {
         if (player1.getPoints() == winPoint) {
             System.out.println(player1.getPoints());
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
@@ -179,7 +181,7 @@ public class Game extends JFrame {
             newGameButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Game newGame = new Game(player1, player2, winPoint);
+                    Game newGame = new Game(player1, player2, winPoint, map);
                     newGame.setVisible(true);
                 }
             });
@@ -188,7 +190,7 @@ public class Game extends JFrame {
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         } else
-            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + "   Player2 : " + player2.getName() + " " + player2.getPoints());
 
 
     }
@@ -220,7 +222,7 @@ public class Game extends JFrame {
                 int[] coordinatesP2 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
                 player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
-                this.newRoundHandler(player1, player2, winPoint);
+                this.newRoundHandler(player1, player2, winPoint, map);
                 shotsInTheAir.clear();  // this mutates the iterator
                 break;  // so can't use this loop anymore (and we don't need to)
             }
@@ -233,13 +235,13 @@ public class Game extends JFrame {
                 int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
                 player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
-                this.newRoundHandler(player1, player2, winPoint);
+                this.newRoundHandler(player1, player2, winPoint, map);
                 shotsInTheAir.clear();
                 break;
             }
 
         }
-        if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty() ) {
+        if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty()) {
             this.everyThing.remove(p2Tank);
             this.everyThing.remove(p1Tank);
             int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);

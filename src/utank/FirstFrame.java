@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FirstFrame {
+    int map;
+
     public FirstFrame() {
         JFrame jFrame = new JFrame();
 
@@ -18,9 +20,31 @@ public class FirstFrame {
         JTextField playerOneTextField = new JTextField(5);
         JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(1);
+        JLabel playerOneKeys = new JLabel("Player1 plays with : ");
+        JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
+        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 "};
+        JComboBox mapsComboBox = new JComboBox(mapsArray);
+
 
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
+        JButton settingButton = new JButton("Setting");
+
+        mapsComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String mapString = (String) mapsComboBox.getSelectedItem();
+                if (mapString == " Map 1 ")
+                    map = 1;
+                else if (mapString == " Map 2 ")
+                    map = 2;
+                else
+                    map = 3;
+
+
+            }
+        });
+
 
         enterGameButton.addActionListener(new ActionListener() {
             @Override
@@ -28,7 +52,7 @@ public class FirstFrame {
                 jFrame.dispose();
                 Player player1 = new Player(playerOneTextField.getText());
                 Player player2 = new Player(playerTwoTextField.getText());
-                Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()));
+                Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()), map);
 
 
                 game.addKeyListener(new GameActionListener());
@@ -52,6 +76,12 @@ public class FirstFrame {
                 Rules rules = new Rules();
             }
         });
+        settingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
 
         jPanel.add(welcome);
@@ -61,6 +91,7 @@ public class FirstFrame {
         jPanel.add(playerTwoTextField);
         jPanel.add(winningPointLabel);
         jPanel.add(winningTextField);
+        jPanel.add(mapsComboBox);
         jPanel.add(enterGameButton);
         jPanel.add(howToPlayButton);
         jFrame.add(jPanel);
