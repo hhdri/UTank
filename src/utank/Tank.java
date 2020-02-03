@@ -39,6 +39,6 @@ public class Tank extends MovingThing {
         int delta_x = moving.x - this.x;
         int delta_y = moving.y - this.y;
         double distance = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        return distance < this.RADIUS + moving.getRadius();
+        return distance < RADIUS + moving.getRadius();
     }
 }

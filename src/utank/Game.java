@@ -39,6 +39,9 @@ public class Game extends JFrame {
         int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
         player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
         this.everyThing.add(player2.getTank());
+
+        PowerUp test = new PowerUp(100, 100, PowerUpType.MINE);
+        this.everyThing.add(test);
     }
 
     private void newRoundHandler(Player player1, Player player2) {
