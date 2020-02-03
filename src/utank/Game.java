@@ -43,7 +43,7 @@ public class Game extends JFrame {
 
     private void newRoundHandler(Player player1, Player player2) {
         if (player1.getPoints() == WIN_POINT) {
-            JOptionPane.showMessageDialog(this,   "  Player1 won!");
+            JOptionPane.showMessageDialog(this, "  Player1 won!");
             this.dispose();
         } else if (player2.getPoints() == WIN_POINT) {
             JButton newGameButton = new JButton("New Game");
@@ -55,11 +55,11 @@ public class Game extends JFrame {
                     newGame.setVisible(true);
                 }
             });
-            JOptionPane.showMessageDialog(this,   "Player2 won!");
+            JOptionPane.showMessageDialog(this, "Player2 won!");
             this.dispose();
 
         } else
-            JOptionPane.showMessageDialog(this, "New Round! Player1 :  " + player1.getPoints()  + " Player2 :  " + player2.getPoints());
+            JOptionPane.showMessageDialog(this, "New Round! Player1 :  " + player1.getPoints() + " Player2 :  " + player2.getPoints());
 
 
     }

@@ -13,6 +13,8 @@ public class FirstFrame {
         JLabel welcome = new JLabel("Welcome to UTank. ",SwingConstants.CENTER);
         welcome.setBounds(200,200,100,30);
         JLabel winningPointLabel = new JLabel("Winning Point : ",SwingConstants.CENTER);
+        JLabel playerOneLabel = new JLabel("Player 1 : ");
+        JLabel playerTwoLabel = new JLabel("");
         JTextField winningTextField = new JTextField(1);
 
         JButton enterGameButton = new JButton("Enter Game");
@@ -28,7 +30,7 @@ public class FirstFrame {
                 game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
                 new Timer(
-                        20,
+                        10,
                         e -> {
                             game.updateState();
                             game.repaint();
