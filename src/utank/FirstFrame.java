@@ -30,6 +30,7 @@ public class FirstFrame {
                 Player player2 = new Player(playerTwoTextField.getText());
                 Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()));
 
+
                 game.addKeyListener(new GameActionListener());
                 game.setVisible(true);
                 game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -37,7 +38,7 @@ public class FirstFrame {
                 new Timer(
                         10,
                         e -> {
-                            game.updateState(player1, player2);
+                            game.updateState(player1, player2, Integer.parseInt(winningTextField.getText()));
                             game.repaint();
                         }
                 ).start();
