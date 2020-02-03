@@ -19,9 +19,18 @@ public class Rules {
                 FirstFrame firstFrame = new FirstFrame();
             }
         });
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.dispose();
+                jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            }
+        });
 
         jPanel.add(text);
         jPanel.add(backButton);
+        jPanel.add(exitButton);
         jFrame.add(jPanel);
         jFrame.setVisible(true);
 
