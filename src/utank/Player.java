@@ -24,24 +24,21 @@ public class Player {
                     hasContactWithTank = true;
                 }
             }
-//            else if(everything.get(i) instanceof Shot){
-//                System.out.println("shot");
-//            }
             else {
                 int[] props = {((Wall)everything.get(i)).i1, ((Wall)everything.get(i)).i2,
                         ((Wall)everything.get(i)).j, ((Wall)everything.get(i)).WIDTH};
                 boolean isVert = ((Wall)everything.get(i)).isVertical;
                 if(isVert) {
-                    int[] borderPointsVerticalX = {props[2] - (30)*props[3], props[0] + (30)*props[3]};
-                    int[] borderPointsVerticalY = {props[0] - (30)*props[3], props[1] + (30)*props[3]};
+                    int[] borderPointsVerticalX = {props[2] - (50)*props[3], props[2] + (50)*props[3]};
+                    int[] borderPointsVerticalY = {props[0] - (50)*props[3], props[1] + (50)*props[3]};
                     if(borderPointsVerticalX[0] <= coords[0] && coords[0] <= borderPointsVerticalX[1] &&
                             borderPointsVerticalY[0] <= coords[1] && coords[1] <= borderPointsVerticalY[1]){
                         hasContactWithWall = true;
                     }
                 }
                 else {
-                    int[] borderPointsY = {props[2] - (30)*props[3], props[0] + (30)*props[3]};
-                    int[] borderPointsX = {props[0] - (30)*props[3], props[1] + (30)*props[3]};
+                    int[] borderPointsY = {props[2] - (50)*props[3], props[2] + (50)*props[3]};
+                    int[] borderPointsX = {props[0] - (50)*props[3], props[1] + (50)*props[3]};
                     if(borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
                             borderPointsY[0] <= coords[1] && coords[1] <= borderPointsY[1]){
                         hasContactWithWall = true;
