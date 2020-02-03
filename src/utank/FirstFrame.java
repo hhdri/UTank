@@ -8,13 +8,15 @@ public class FirstFrame {
     public FirstFrame() {
         JFrame jFrame = new JFrame();
 
-        jFrame.setBounds(0,0,500,500);
+        jFrame.setBounds(0, 0, 500, 500);
         JPanel jPanel = new JPanel();
-        JLabel welcome = new JLabel("Welcome to UTank. ",SwingConstants.CENTER);
-        welcome.setBounds(200,200,100,30);
-        JLabel winningPointLabel = new JLabel("Winning Point : ",SwingConstants.CENTER);
+        JLabel welcome = new JLabel("Welcome to UTank. ", SwingConstants.CENTER);
+        welcome.setBounds(200, 200, 100, 30);
+        JLabel winningPointLabel = new JLabel("Winning Point : ", SwingConstants.CENTER);
         JLabel playerOneLabel = new JLabel("Player 1 : ");
-        JLabel playerTwoLabel = new JLabel("");
+        JLabel playerTwoLabel = new JLabel("Player 2 : ");
+        JTextField playerOneTextField = new JTextField(5);
+        JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(1);
 
         JButton enterGameButton = new JButton("Enter Game");
@@ -24,7 +26,11 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent a) {
                 jFrame.dispose();
-                Game game = new Game(3);
+                Player player1 = new Player(playerOneTextField.getText());
+                Player player2 = new Player(playerTwoTextField.getText());
+                Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()));
+
+
                 game.addKeyListener(new GameActionListener());
                 game.setVisible(true);
                 game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -32,7 +38,7 @@ public class FirstFrame {
                 new Timer(
                         10,
                         e -> {
-                            game.updateState();
+                            game.updateState(player1, player2, Integer.parseInt(winningTextField.getText()));
                             game.repaint();
                         }
                 ).start();
@@ -49,6 +55,10 @@ public class FirstFrame {
 
 
         jPanel.add(welcome);
+        jPanel.add(playerOneLabel);
+        jPanel.add(playerOneTextField);
+        jPanel.add(playerTwoLabel);
+        jPanel.add(playerTwoTextField);
         jPanel.add(winningPointLabel);
         jPanel.add(winningTextField);
         jPanel.add(enterGameButton);

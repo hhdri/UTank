@@ -13,11 +13,11 @@ public class Game extends JFrame {
 
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
-    private Player player1 = new Player();
-    private Player player2 = new Player();
+    //private Player player1 = new Player();
+    //private Player player2 = new Player();
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
-    public Game(int map) {
+    public Game(Player player1, Player player2, int winPoint) {
         this.setSize(Game.WIDTH, Game.HEIGHT);
 
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
@@ -154,39 +154,48 @@ public class Game extends JFrame {
 
 
         int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-        this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
+        player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
         int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-        this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
+        player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
         this.everyThing.add(player2.getTank());
     }
 
-    private void newRoundHandler(Player player1, Player player2) {
-        if (player1.getPoints() == WIN_POINT) {
-            JOptionPane.showMessageDialog(this, "  Player1 won!");
+    private void newRoundHandler2(Player player1, Player player2) {
+        JOptionPane.showMessageDialog(this, " Equal !");
+    }
+    private void newRoundHandler(Player player1, Player player2, int winPoint) {
+        if (player1.getPoints() == winPoint) {
+            System.out.println(player1.getPoints());
+            JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
             this.dispose();
-        } else if (player2.getPoints() == WIN_POINT) {
+            this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        } else if (player2.getPoints() == winPoint) {
+            JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
+            System.out.println(player2.getPoints());
+            System.out.println(winPoint);
             JButton newGameButton = new JButton("New Game");
             this.add(newGameButton);
             newGameButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Game newGame = new Game(3);
+                    Game newGame = new Game(player1, player2, winPoint);
                     newGame.setVisible(true);
                 }
             });
-            JOptionPane.showMessageDialog(this, "Player2 won!");
+
             this.dispose();
+            this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         } else
-            JOptionPane.showMessageDialog(this, "New Round! Player1 :  " + player1.getPoints() + " Player2 :  " + player2.getPoints());
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
 
 
     }
 
-    public void updateState() {
-        Tank p1Tank = (Tank) this.player1.getTank();
-        Tank p2Tank = (Tank) this.player2.getTank();
+    public void updateState(Player player1, Player player2, int winPoint) {
+        Tank p1Tank = (Tank) player1.getTank();
+        Tank p2Tank = (Tank) player2.getTank();
 
         if (p1Tank.shotTimer != 0) {
             p1Tank.shotTimer -= 1;
@@ -206,12 +215,12 @@ public class Game extends JFrame {
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
+                player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
                 int[] coordinatesP2 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
+                player2.newRound(true, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
-                this.newRoundHandler(player1, player2);
+                this.newRoundHandler(player1, player2, winPoint);
                 shotsInTheAir.clear();  // this mutates the iterator
                 break;  // so can't use this loop anymore (and we don't need to)
             }
@@ -219,15 +228,28 @@ public class Game extends JFrame {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
+                player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
                 int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-                this.player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
+                player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
                 this.everyThing.add(player2.getTank());
-                this.newRoundHandler(player1, player2);
+                this.newRoundHandler(player1, player2, winPoint);
                 shotsInTheAir.clear();
                 break;
             }
+
+        }
+        if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty() ) {
+            this.everyThing.remove(p2Tank);
+            this.everyThing.remove(p1Tank);
+            int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+            player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
+            this.everyThing.add(player1.getTank());
+            int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+            player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
+            this.everyThing.add(player2.getTank());
+            this.newRoundHandler2(player1, player2);
+            shotsInTheAir.clear();
         }
 
         this.shotsInTheAir.forEach(Shot::growOld);
