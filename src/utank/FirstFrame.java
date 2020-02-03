@@ -24,7 +24,7 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent a) {
                 jFrame.dispose();
-                Game game = new Game();
+                Game game = new Game(3);
                 game.addKeyListener(new GameActionListener());
                 game.setVisible(true);
                 game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
