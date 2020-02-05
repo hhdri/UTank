@@ -284,10 +284,10 @@ public class Game extends JFrame {
 
         GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
         if (listener.p1Move) {
+            p1Tank.calculateVelocity();
             if (p1Tank.contacts(p2Tank)) {
                 p1Tank.blockedBy(p2Tank);
                 p2Tank.blockedBy(p1Tank);
-                p1Tank.step();
             }
             for (Wall wall : walls)
                 if (wall.contacts(p1Tank)) {
@@ -307,10 +307,10 @@ public class Game extends JFrame {
             p1Tank.shotTimer = 50;
         }
         if (listener.p2Move) {
+            p2Tank.calculateVelocity();
             if (p1Tank.contacts(p2Tank)) {
                 p1Tank.blockedBy(p2Tank);
                 p2Tank.blockedBy(p1Tank);
-                p2Tank.step();
             }
             for (Wall wall : walls)
                 if (wall.contacts(p2Tank)) {

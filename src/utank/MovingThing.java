@@ -39,22 +39,61 @@ public abstract class MovingThing extends Thing{
 
     void blockedBy(Wall wall) {
         if (wall.isVertical) {
-            if ((wall.j < this.getRoundedX() && vX < 0) || (wall.j > this.getRoundedX() && vX > 0))
-                vX = 0;
-        } else {
-            if ((wall.j < this.getRoundedY() && vY < 0) || (wall.j > this.getRoundedY() && vY > 0))
-                vY = 0;
+            if (this.getY() > Math.min(wall.i1, wall.i2) && this.getY() < Math.max(wall.i1, wall.i2)) {
+                if ((wall.j < this.getRoundedX() && vX < 0) || (wall.j > this.getRoundedX() && vX > 0))
+                    vX = 0;
+            }
+            else if (this.getY() < Math.min(wall.i1, wall.i2)) {
+                float repX = wall.j;
+                float repY = Math.min(wall.i1, wall.i2);
+                float m = (repY - this.getY()) / (repX - this.getX());
+                float vX1 = (1/(1+m*m))*(this.vX*m*m-this.vY*m);
+                float vY1 = (1/(1+m*m))*(-this.vX*m+this.vY);
+                this.vX = vX1;
+                this.vY = vY1;
+            }
+            else {
+                float repX = wall.j;
+                float repY = Math.max(wall.i1, wall.i2) - 2;
+                float m = (repY - this.getY()) / (repX - this.getX());
+                float vX1 = (1/(1+m*m))*(this.vX*m*m-this.vY*m);
+                float vY1 = (1/(1+m*m))*(-this.vX*m+this.vY);
+                this.vX = vX1;
+                this.vY = vY1;
+            }
+        }
+        else {
+            if (this.getX() > Math.min(wall.i1, wall.i2) && this.getX() < Math.max(wall.i1, wall.i2)) {
+                if ((wall.j < this.getRoundedY() && vY < 0) || (wall.j > this.getRoundedY() && vY > 0))
+                    vY = 0;
+            }
+            else if (this.getX() < Math.min(wall.i1, wall.i2)) {
+                float repY = wall.j;
+                float repX = Math.min(wall.i1, wall.i2) + 2;
+                float m = (repY - this.getY()) / (repX - this.getX());
+                float vX1 = (1/(1+m*m))*(this.vX*m*m-this.vY*m);
+                float vY1 = (1/(1+m*m))*(-this.vX*m+this.vY);
+                this.vX = vX1;
+                this.vY = vY1;
+            }
+            else {
+                float repY = wall.j;
+                float repX = Math.max(wall.i1, wall.i2) - 2;
+                float m = (repY - this.getY()) / (repX - this.getX());
+                float vX1 = (1/(1+m*m))*(this.vX*m*m-this.vY*m);
+                float vY1 = (1/(1+m*m))*(-this.vX*m+this.vY);
+                this.vX = vX1;
+                this.vY = vY1;
+            }
         }
     }
 
     void blockedBy(Tank tank) {
-        this.vX = tank.getY() - this.getY();
-        this.vY = this.getX() - tank.getX();
-
-        double scale = Math.sqrt(this.vX * this.vX + this.vY * this.vY) / 3;
-
-        this.vX /= scale;
-        this.vY /= scale;
+        float m = (tank.getY() - this.getY()) / (tank.getX() - this.getX());
+        float vX1 = (1/(1+m*m))*(this.vX*m*m-this.vY*m);
+        float vY1 = (1/(1+m*m))*(-this.vX*m+this.vY);
+        this.vX = vX1;
+        this.vY = vY1;
     }
 
     public double getDirection() {
