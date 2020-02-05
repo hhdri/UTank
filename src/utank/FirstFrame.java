@@ -35,11 +35,11 @@ public class FirstFrame {
             public void actionPerformed(ActionEvent e) {
                 String mapString = (String) mapsComboBox.getSelectedItem();
                 if (mapString == " Map 1 ")
-                    map = 1;
+                    map = 3;
                 else if (mapString == " Map 2 ")
                     map = 2;
                 else
-                    map = 3;
+                    map = 1;
 
 
             }

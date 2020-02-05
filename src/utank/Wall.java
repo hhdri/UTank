@@ -26,12 +26,12 @@ public class Wall extends Thing {
     public void draw(Graphics graphics) {
         int width = (this.isVertical)? Wall.WIDTH : this.i2 - this.i1;
         int height = (this.isVertical)? this.i2 - this.i1 : Wall.WIDTH;
-        graphics.fillRect(this.x, this.y, width, height);
+        graphics.fillRect(this.getRoundedX(), this.getRoundedY(), width, height);
     }
 
     boolean contacts(MovingThing moving) {
-        int mI = (this.isVertical)? moving.y : moving.x;
-        int mJ = (this.isVertical)? moving.x : moving.y;
+        int mI = (this.isVertical)? moving.getRoundedY() : moving.getRoundedX();
+        int mJ = (this.isVertical)? moving.getRoundedX() : moving.getRoundedY();
 
         int start = Math.min(this.i1, this.i2);
         int end = Math.max(this.i1, this.i2);

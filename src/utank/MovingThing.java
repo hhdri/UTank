@@ -3,7 +3,7 @@ package utank;
 public abstract class MovingThing extends Thing{
     double direction; // rad
     float velocity; // pix/step
-    int vX, vY;
+    float vX, vY;
     float angularVelocity; // rad/step
 
     MovingThing(int x, int y, double direction, float velocity, float angularVelocity) {
@@ -28,28 +28,28 @@ public abstract class MovingThing extends Thing{
     }
 
     void calculateVelocity() {
-        this.vX = (int) Math.round(this.velocity * Math.sin(this.direction));
-        this.vY = (int) Math.round(this.velocity * Math.cos(this.direction));
+        this.vX = (float) (this.velocity * Math.sin(this.direction));
+        this.vY = (float) (this.velocity * Math.cos(this.direction));
     }
 
     void step() {
-        this.x += this.vX;
-        this.y += this.vY;
+        this.setX(this.getX() + this.vX);
+        this.setY(this.getY() + this.vY);
     }
 
     void blockedBy(Wall wall) {
         if (wall.isVertical) {
-            if ((wall.j < x && vX < 0) || (wall.j > x && vX > 0))
+            if ((wall.j < this.getRoundedX() && vX < 0) || (wall.j > this.getRoundedX() && vX > 0))
                 vX = 0;
         } else {
-            if ((wall.j < y && vY < 0) || (wall.j > y && vY > 0))
+            if ((wall.j < this.getRoundedY() && vY < 0) || (wall.j > this.getRoundedY() && vY > 0))
                 vY = 0;
         }
     }
 
     void blockedBy(Tank tank) {
-        this.vX = tank.y - this.y;
-        this.vY = this.x - tank.x;
+        this.vX = tank.getY() - this.getY();
+        this.vY = this.getX() - tank.getX();
 
         double scale = Math.sqrt(this.vX * this.vX + this.vY * this.vY) / 3;
 
