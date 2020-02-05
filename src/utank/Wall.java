@@ -38,11 +38,11 @@ public class Wall extends Thing {
             }
             else if (moving.getY() < Math.min(this.i1, this.i2)) {
                 repX = this.j;
-                repY = Math.min(this.i1, this.i2) + 5;
+                repY = Math.min(this.i1, this.i2) + 2;
             }
             else {
                 repX = this.j;
-                repY = Math.max(this.i1, this.i2) - 5;
+                repY = Math.max(this.i1, this.i2) - 2;
             }
         }
         else {
@@ -52,11 +52,11 @@ public class Wall extends Thing {
             }
             else if (moving.getX() < Math.min(this.i1, this.i2)) {
                 repY = this.j;
-                repX = Math.min(this.i1, this.i2) + 5;
+                repX = Math.min(this.i1, this.i2) + 2;
             }
             else {
                 repY = this.j;
-                repX = Math.max(this.i1, this.i2) - 5;
+                repX = Math.max(this.i1, this.i2) - 2;
             }
         }
         return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius();
