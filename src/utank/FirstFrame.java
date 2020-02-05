@@ -33,15 +33,17 @@ public class FirstFrame {
         mapsComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String mapString = (String) mapsComboBox.getSelectedItem().toString();
-                if (mapString == " Map 2 ")
+                String mapString =  mapsComboBox.getSelectedItem().toString();
+                if ( mapString == " Map 1 ")
+                    map = 1;
+                else if (mapString == " Map 2 ")
                     map = 2;
                 else if (mapString == " Map 3 ")
                     map = 3;
                 else if (mapString == " Map 4 ")
                     map = 4;
                 else
-                    map = 1;
+                    map = 0;
 
 
 
