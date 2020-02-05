@@ -5,7 +5,7 @@ import java.awt.*;
 abstract class Thing {
     private float x, y;
 
-    Thing(int x, int y) {
+    Thing(float x, float y) {
         this.x = x;
         this.y = y;
     }

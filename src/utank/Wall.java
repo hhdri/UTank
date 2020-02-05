@@ -30,20 +30,35 @@ public class Wall extends Thing {
     }
 
     boolean contacts(MovingThing moving) {
-        int mI = (this.isVertical)? moving.getRoundedY() : moving.getRoundedX();
-        int mJ = (this.isVertical)? moving.getRoundedX() : moving.getRoundedY();
-
-        int start = Math.min(this.i1, this.i2);
-        int end = Math.max(this.i1, this.i2);
-
-        int contactJ = mJ +
-                ((this.j <= mJ)? -1 : 1) *
-                        moving.getRadius();
-        return (
-                start <= mI + moving.getRadius() &&
-                        mI - moving.getRadius() <= end &&
-                        this.j - Wall.WIDTH <= contactJ &&
-                        contactJ <= this.j + Wall.WIDTH
-        );
+        float repX = 0, repY = 0;
+        if (isVertical) {
+            if (moving.getY() > Math.min(this.i1, this.i2) && moving.getY() < Math.max(this.i1, this.i2)) {
+                repX = this.j;
+                repY = moving.getY();
+            }
+            else if (moving.getY() < Math.min(this.i1, this.i2)) {
+                repX = this.j;
+                repY = Math.min(this.i1, this.i2) + 5;
+            }
+            else {
+                repX = this.j;
+                repY = Math.max(this.i1, this.i2) - 5;
+            }
+        }
+        else {
+            if (moving.getX() > Math.min(this.i1, this.i2) && moving.getX() < Math.max(this.i1, this.i2)) {
+                repY = this.j;
+                repX = moving.getX();
+            }
+            else if (moving.getX() < Math.min(this.i1, this.i2)) {
+                repY = this.j;
+                repX = Math.min(this.i1, this.i2) + 5;
+            }
+            else {
+                repY = this.j;
+                repX = Math.max(this.i1, this.i2) - 5;
+            }
+        }
+        return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius();
     }
 }
