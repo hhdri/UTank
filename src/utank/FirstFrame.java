@@ -22,7 +22,7 @@ public class FirstFrame {
         JTextField winningTextField = new JTextField(1);
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
-        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 "};
+        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 " , " Map 4 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
 
 
@@ -34,11 +34,11 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String mapString = (String) mapsComboBox.getSelectedItem().toString();
-                if (mapString == "Map 2")
+                if (mapString == " Map 2 ")
                     map = 2;
-                else if (mapString == "Map 3")
+                else if (mapString == " Map 3 ")
                     map = 3;
-                else if (mapString == "Map 4")
+                else if (mapString == " Map 4 ")
                     map = 4;
                 else
                     map = 1;
