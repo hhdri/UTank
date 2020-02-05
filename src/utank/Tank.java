@@ -8,6 +8,7 @@ public class Tank extends MovingThing {
     final static int GUN_LENGTH = 30;
     int shotCounter = 10;
     int shotTimer = 0;
+    boolean hasPowerUp = false;
     Tank(int x, int y, float direction) {
         super(x, y, direction, 2, (float) 0.03);
     }

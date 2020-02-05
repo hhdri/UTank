@@ -43,6 +43,7 @@ public class Game extends JFrame {
 
         PowerUp test = new PowerUp(100, 100, PowerUpType.MINE);
         this.everyThing.add(test);
+        this.powerUpsInTheAir.add(test);
     }
 
     private void newRoundHandler(Player player1, Player player2) {
@@ -65,8 +66,6 @@ public class Game extends JFrame {
 
         } else
             JOptionPane.showMessageDialog(this, "New Round! " + player1.getName() + " " + player1.getPoints() + " " + player2.getName() + " " + player2.getPoints());
-
-
     }
 
     public void updateState(Player player1, Player player2) {
@@ -81,13 +80,19 @@ public class Game extends JFrame {
         }
 
         for (Shot shot : this.shotsInTheAir) {
+            if(p1Tank.hasPowerUp){
+                p1Tank.hasPowerUp = false;
+            }
+            if(p2Tank.hasPowerUp){
+                p2Tank.hasPowerUp = false;
+            }
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
                     shot.bounceAgainst(wall);
-                } else
+                } else if(shot.angularVelocity != 0 && shot.direction != 0 && shot.velocity != 0)
                     shot.step();
             }
-            if (p1Tank.contacts(shot)) {
+            if (p1Tank.contacts(shot) && shot.age < 1000) {
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
@@ -100,7 +105,7 @@ public class Game extends JFrame {
                 shotsInTheAir.clear();  // this mutates the iterator
                 break;  // so can't use this loop anymore (and we don't need to)
             }
-            if (p2Tank.contacts(shot)) {
+            if (p2Tank.contacts(shot) && shot.age < 1000) {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
@@ -117,9 +122,11 @@ public class Game extends JFrame {
         for (PowerUp powerUp : this.powerUpsInTheAir) {
             if (powerUp.contacts(p1Tank)){
                 this.everyThing.remove(powerUp);
+                p1Tank.hasPowerUp = true;
             }
             if (powerUp.contacts(p2Tank)){
                 this.everyThing.remove(powerUp);
+                p2Tank.hasPowerUp = true;
             }
         }
         this.shotsInTheAir.forEach(Shot::growOld);
@@ -143,12 +150,20 @@ public class Game extends JFrame {
             p1Tank.turnLeft();
         if (listener.p1Right)
             p1Tank.turnRight();
-        if (listener.p1Fire && p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
-            Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
-            this.shotsInTheAir.add(shotP1);
-            listener.p1Fire = false;
-            p1Tank.shotCounter -= 1;
-            p1Tank.shotTimer = 50;
+        if (listener.p1Fire) {
+            if (p1Tank.hasPowerUp){
+                Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY());
+                this.shotsInTheAir.add(shotP1);
+                listener.p1Fire = false;
+                p1Tank.shotTimer = 50;
+            }
+            else if(p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
+                Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
+                this.shotsInTheAir.add(shotP1);
+                listener.p1Fire = false;
+                p1Tank.shotCounter -= 1;
+                p1Tank.shotTimer = 50;
+            }
         }
         if (listener.p2Move) {
             if (p1Tank.contacts(p2Tank)) {
@@ -166,12 +181,20 @@ public class Game extends JFrame {
             p2Tank.turnLeft();
         if (listener.p2Right)
             p2Tank.turnRight();
-        if (listener.p2Fire && p2Tank.shotTimer == 0 && p2Tank.shotCounter != 0) {
-            Shot shotP2 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
-            this.shotsInTheAir.add(shotP2);
-            listener.p2Fire = false;
-            p2Tank.shotCounter -= 1;
-            p2Tank.shotTimer = 50;
+        if (listener.p2Fire) {
+            if (p2Tank.hasPowerUp){
+                Shot shotP1 = new Shot(p2Tank.getGunX(), p2Tank.getGunY());
+                this.shotsInTheAir.add(shotP1);
+                listener.p2Fire = false;
+                p2Tank.shotTimer = 50;
+            }
+            else if(p2Tank.shotTimer == 0 && p2Tank.shotCounter != 0) {
+                Shot shotP1 = new Shot(p2Tank.getGunX(), p2Tank.getGunY(), (float) p2Tank.getDirection());
+                this.shotsInTheAir.add(shotP1);
+                listener.p2Fire = false;
+                p2Tank.shotCounter -= 1;
+                p2Tank.shotTimer = 50;
+            }
         }
     }
 

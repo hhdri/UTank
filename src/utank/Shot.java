@@ -12,7 +12,10 @@ public class Shot extends MovingThing {
         super(x, y, direction, (float) 2, (float) 1);
         age = Shot.LIFE;
     }
-
+    Shot(int x, int y){
+        super(x, y, 0, (float) 0, (float) 0);
+        age = Shot.LIFE + 1000;
+    }
     void draw(Graphics graphics) {
         graphics.drawLine(this.x, this.y, (int) Math.round(this.x + (Shot.RADIUS * Math.sin(this.direction))), (int) Math.round(this.y + (Shot.RADIUS * Math.cos(this.direction))));
     }
