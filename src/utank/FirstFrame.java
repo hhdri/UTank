@@ -22,7 +22,7 @@ public class FirstFrame {
         JTextField winningTextField = new JTextField(1);
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
-        String mapsArray[] = {"Map 1", "Map 2", "Map 3", "Map 4"};
+        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
 
 

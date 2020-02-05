@@ -14,8 +14,6 @@ public class Game extends JFrame {
 
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
-    //private Player player1 = new Player();
-    //private Player player2 = new Player();
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
     public Game(Player player1, Player player2, int winPoint, int map) {

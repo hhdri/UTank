@@ -14,20 +14,20 @@ public class Tank extends MovingThing {
 
     public void draw(Graphics graphics) {
         graphics.drawOval(
-                this.x - Tank.RADIUS,
-                this.y - Tank.RADIUS,
+                this.getRoundedX() - Tank.RADIUS,
+                this.getRoundedY() - Tank.RADIUS,
                 Tank.RADIUS * 2,
                 Tank.RADIUS * 2
         );
-        graphics.drawLine(this.x, this.y, this.getGunX(), this.getGunY());
+        graphics.drawLine(this.getRoundedX(), this.getRoundedY(), this.getGunX(), this.getGunY());
     }
 
     int getGunX() {
-        return (int) Math.round(this.x + (Tank.GUN_LENGTH * Math.sin(this.direction)));
+        return (int) Math.round(this.getX() + (Tank.GUN_LENGTH * Math.sin(this.direction)));
     }
 
     int getGunY() {
-        return (int) Math.round(this.y + (Tank.GUN_LENGTH * Math.cos(this.direction)));
+        return (int) Math.round(this.getY() + (Tank.GUN_LENGTH * Math.cos(this.direction)));
     }
 
     @Override
@@ -36,9 +36,9 @@ public class Tank extends MovingThing {
     }
 
     boolean contacts(MovingThing moving) {
-        int delta_x = moving.x - this.x;
-        int delta_y = moving.y - this.y;
+        float delta_x = moving.getX() - this.getX();
+        float delta_y = moving.getY() - this.getY();
         double distance = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        return distance < this.RADIUS + moving.getRadius();
+        return distance < Tank.RADIUS + moving.getRadius();
     }
 }
