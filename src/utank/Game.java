@@ -16,6 +16,7 @@ public class Game extends JFrame {
     //private Player player1 = new Player();
     //private Player player2 = new Player();
     private List<Shot> shotsInTheAir = new ArrayList<>();
+    private List<PowerUp> powerUpsInTheAir = new ArrayList<>();
 
     public Game(Player player1, Player player2, int winPoint) {
         this.setSize(Game.WIDTH, Game.HEIGHT);
@@ -113,7 +114,14 @@ public class Game extends JFrame {
                 break;
             }
         }
-
+        for (PowerUp powerUp : this.powerUpsInTheAir) {
+            if (powerUp.contacts(p1Tank)){
+                this.everyThing.remove(powerUp);
+            }
+            if (powerUp.contacts(p2Tank)){
+                this.everyThing.remove(powerUp);
+            }
+        }
         this.shotsInTheAir.forEach(Shot::growOld);
         this.shotsInTheAir.removeIf(Shot::isDead);
 
