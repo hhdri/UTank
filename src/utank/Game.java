@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
-    private static int WIN_POINT = 3;
+    //private static int WIN_POINT = 3;
     private int map;
 
     private List<Thing> everyThing = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Game extends JFrame {
 
     public Game(Player player1, Player player2, int winPoint, int map) {
         this.setSize(Game.WIDTH, Game.HEIGHT);
-
+        this.setTitle("UTANK GAME");
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
         this.everyThing.add(leftEdge);
         this.walls.add(leftEdge);
@@ -31,6 +31,24 @@ public class Game extends JFrame {
         Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
         this.everyThing.add(bottomEdge);
         this.walls.add(bottomEdge);
+        //JPanel jPanel = new JPanel();
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu jMenu = new JMenu("Menu");
+        JMenuItem jMenuItem = new JMenuItem("Go to menu");
+
+
+        jMenu.add(jMenuItem);
+        jMenuBar.add(jMenu);
+        //jPanel.add(jMenuBar);
+        this.setJMenuBar(jMenuBar);
+        this.setVisible(true);
+        jMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                FirstFrame frame = new FirstFrame();
+            }
+        });
 
         switch (map) {
             case 0:
