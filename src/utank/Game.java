@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
@@ -47,6 +51,7 @@ public class Game extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 FirstFrame frame = new FirstFrame();
+
             }
         });
 
@@ -210,14 +215,13 @@ public class Game extends JFrame {
 
     private void newRoundHandler(Player player1, Player player2, int winPoint, int map) {
         if (player1.getPoints() == winPoint) {
-            System.out.println(player1.getPoints());
+
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         } else if (player2.getPoints() == winPoint) {
             JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
-            System.out.println(player2.getPoints());
-            System.out.println(winPoint);
+
             JButton newGameButton = new JButton("New Game");
             this.add(newGameButton);
             newGameButton.addActionListener(new ActionListener() {
@@ -231,8 +235,11 @@ public class Game extends JFrame {
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        } else
+        } else {
+            BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
+
+        }
 
 
     }
