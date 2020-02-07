@@ -3,7 +3,7 @@ package utank;
 import java.awt.*;
 
 abstract class Thing {
-    private float x, y;
+    public float x, y;
 
     Thing(float x, float y) {
         this.x = x;
