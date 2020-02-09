@@ -18,18 +18,7 @@ public class Game extends JFrame {
     public Game(Player player1, Player player2, int winPoint, int map) {
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
-        Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
-        this.everyThing.add(leftEdge);
-        this.walls.add(leftEdge);
-        Wall topEdge = new Wall(20, 45, Game.WIDTH - 40, false);
-        this.everyThing.add(topEdge);
-        this.walls.add(topEdge);
-        Wall rightEdge = new Wall(Game.WIDTH - 20, 45, Game.HEIGHT - 65, true);
-        this.everyThing.add(rightEdge);
-        this.walls.add(rightEdge);
-        Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
-        this.everyThing.add(bottomEdge);
-        this.walls.add(bottomEdge);
+
         //JPanel jPanel = new JPanel();
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jMenu = new JMenu("Menu");
@@ -48,6 +37,19 @@ public class Game extends JFrame {
                 FirstFrame frame = new FirstFrame();
             }
         });
+
+        Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
+        this.everyThing.add(leftEdge);
+        this.walls.add(leftEdge);
+        Wall topEdge = new Wall(20, 45, Game.WIDTH - 40, false);
+        this.everyThing.add(topEdge);
+        this.walls.add(topEdge);
+        Wall rightEdge = new Wall(Game.WIDTH - 20, 45, Game.HEIGHT - 65, true);
+        this.everyThing.add(rightEdge);
+        this.walls.add(rightEdge);
+        Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
+        this.everyThing.add(bottomEdge);
+        this.walls.add(bottomEdge);
 
         switch (map) {
             case 0:
@@ -268,11 +270,11 @@ public class Game extends JFrame {
         }
 
         for (Shot shot : this.shotsInTheAir) {
+            shot.step();
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
                     shot.bounceAgainst(wall);
-                } else
-                    shot.step();
+                }
             }
             if (p1Tank.contacts(shot) ) {
                 this.everyThing.remove(p1Tank);
