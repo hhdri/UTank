@@ -11,7 +11,6 @@ public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
     //private static int WIN_POINT = 3;
     private int map;
-    private List<Tank> tanks = new ArrayList<>();
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
     private List<Shot> shotsInTheAir = new ArrayList<>();
@@ -240,8 +239,6 @@ public class Game extends JFrame {
     public void updateState(Player player1, Player player2, int winPoint) {
         Tank p1Tank = (Tank) player1.getTank();
         Tank p2Tank = (Tank) player2.getTank();
-        this.tanks.add(p1Tank);
-        this.tanks.add(p2Tank);
 
         if (p1Tank.shotTimer != 0) {
             p1Tank.shotTimer -= 1;
@@ -260,8 +257,6 @@ public class Game extends JFrame {
             if (p1Tank.contacts(shot) ) {
                 this.everyThing.remove(p1Tank);
                 this.everyThing.remove(p2Tank);
-                this.tanks.remove(p1Tank);
-                this.tanks.remove(p2Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
                 player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
@@ -275,8 +270,6 @@ public class Game extends JFrame {
             if (p2Tank.contacts(shot)) {
                 this.everyThing.remove(p2Tank);
                 this.everyThing.remove(p1Tank);
-                this.tanks.remove(p1Tank);
-                this.tanks.remove(p2Tank);
                 int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
                 player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
                 this.everyThing.add(player1.getTank());
@@ -292,8 +285,6 @@ public class Game extends JFrame {
         if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty()) {
             this.everyThing.remove(p2Tank);
             this.everyThing.remove(p1Tank);
-            this.tanks.remove(p1Tank);
-            this.tanks.remove(p2Tank);
             int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
             player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
             this.everyThing.add(player1.getTank());
