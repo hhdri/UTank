@@ -204,10 +204,30 @@ public class Game extends JFrame {
     }
 
     private void newRoundHandler2(Player player1, Player player2) {
+        GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
+        listener.p1Fire = false;
+        listener.p1Right = false;
+        listener.p1Left = false;
+        listener.p1Move = false;
+        listener.p2Fire = false;
+        listener.p2Right = false;
+        listener.p2Left = false;
+        listener.p2Move = false;
+
         JOptionPane.showMessageDialog(this, " Equal !");
     }
 
     private void newRoundHandler(Player player1, Player player2, int winPoint, int map) {
+        GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
+        listener.p1Fire = false;
+        listener.p1Right = false;
+        listener.p1Left = false;
+        listener.p1Move = false;
+        listener.p2Fire = false;
+        listener.p2Right = false;
+        listener.p2Left = false;
+        listener.p2Move = false;
+
         if (player1.getPoints() == winPoint) {
             System.out.println(player1.getPoints());
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
