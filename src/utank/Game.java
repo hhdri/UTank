@@ -27,25 +27,7 @@ public class Game extends JFrame {
         PowerUp test = new PowerUp(50, 50, PowerUpType.MINE);
         this.everyThing.add(test);
         this.powerUpsInTheAir.add(test);
-        //JPanel jPanel = new JPanel();
-        JMenuBar jMenuBar = new JMenuBar();
-        JMenu jMenu = new JMenu("Menu");
-        JMenuItem jMenuItem = new JMenuItem("Go to menu");
 
-
-        jMenu.add(jMenuItem);
-        jMenuBar.add(jMenu);
-        //jPanel.add(jMenuBar);
-        this.setJMenuBar(jMenuBar);
-        this.setVisible(true);
-        jMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                FirstFrame frame = new FirstFrame();
-
-            }
-        });
 
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
         this.everyThing.add(leftEdge);

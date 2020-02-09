@@ -20,7 +20,7 @@ public class FirstFrame {
         JLabel playerTwoLabel = new JLabel("Player 2 : ");
         JTextField playerOneTextField = new JTextField(5);
         JTextField playerTwoTextField = new JTextField(5);
-        JTextField winningTextField = new JTextField(1);
+        JTextField winningTextField = new JTextField(2);
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
         String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 " , " Map 4 "};
