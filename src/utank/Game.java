@@ -284,7 +284,7 @@ public class Game extends JFrame {
                 break;
             }
             if (p1Tank.hadPowerUp) {
-                if (powerUp.contacts(p2Tank) && powerUp.age < 1000) {
+                if (powerUp.contacts(p2Tank)) {
                     this.everyThing.remove(p2Tank);
                     this.everyThing.remove(p1Tank);
                     int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
@@ -301,7 +301,7 @@ public class Game extends JFrame {
                 }
             }
             if (p2Tank.hadPowerUp){
-                if (powerUp.contacts(p1Tank) && powerUp.age < 1000) {
+                if (powerUp.contacts(p1Tank)) {
                     this.everyThing.remove(p1Tank);
                     this.everyThing.remove(p2Tank);
                     int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
