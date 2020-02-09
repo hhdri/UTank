@@ -6,6 +6,7 @@ public class Shot extends MovingThing {
     private final static int RADIUS = 10;
     private final static int LIFE = 100;
 
+
     int age;
 
     Shot(int x, int y, float direction) {

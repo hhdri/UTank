@@ -1,6 +1,7 @@
 package utank;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -55,8 +56,8 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent a) {
                 jFrame.dispose();
-                Player player1 = new Player(playerOneTextField.getText());
-                Player player2 = new Player(playerTwoTextField.getText());
+                Player player1 = new Player(playerOneTextField.getText(), Color.gray);
+                Player player2 = new Player(playerTwoTextField.getText(), Color.red);
                 Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()), map);
 
 
