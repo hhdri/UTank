@@ -10,8 +10,8 @@ public class FirstFrame {
 
     public FirstFrame() {
         JFrame jFrame = new JFrame();
-
-        jFrame.setBounds(0, 0, 500, 500);
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        jFrame.setBounds(0, 0, 520, 500);
         JPanel jPanel = new JPanel();
         JLabel welcome = new JLabel("Welcome to UTank. ", SwingConstants.CENTER);
         welcome.setBounds(200, 200, 100, 30);
@@ -25,8 +25,6 @@ public class FirstFrame {
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
         String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 " , " Map 4 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
-
-
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
         JButton settingButton = new JButton("Setting");
@@ -45,9 +43,6 @@ public class FirstFrame {
                     map = 4;
                 else
                     map = 0;
-
-
-
             }
         });
 

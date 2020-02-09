@@ -21,6 +21,7 @@ public class Game extends JFrame {
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
     public Game(Player player1, Player player2, int winPoint, int map) {
+        JFrame.setDefaultLookAndFeelDecorated(true);
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
 
@@ -226,10 +227,11 @@ public class Game extends JFrame {
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            FirstFrame firstFrame = new FirstFrame();
         } else if (player2.getPoints() == winPoint) {
             JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
 
-            JButton newGameButton = new JButton("New Game");
+            /*JButton newGameButton = new JButton("New Game");
             this.add(newGameButton);
             newGameButton.addActionListener(new ActionListener() {
                 @Override
@@ -237,10 +239,11 @@ public class Game extends JFrame {
                     Game newGame = new Game(player1, player2, winPoint, map);
                     newGame.setVisible(true);
                 }
-            });
+            });*/
 
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            FirstFrame firstFrame = new FirstFrame();
 
         } else {
             BombSound bombSound = new BombSound();

@@ -10,7 +10,7 @@ public class Rules {
         jFrame.setBounds(0, 0, 500, 500);
 
         JPanel jPanel = new JPanel();
-        JLabel text = new JLabel("The game consists of two tanks...............");
+        JLabel text = new JLabel("The game consists of two tanks...............  Press m for menu");
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
