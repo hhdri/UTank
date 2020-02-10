@@ -39,7 +39,7 @@ public class FirstFrame {
         playerOneButtonGroup.add(jRadioButton2);
         playerTwoButtonGroup.add(jRadioButton3);
         playerTwoButtonGroup.add(jRadioButton4);
-        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 ", " Map 4 "};
+        String[] mapsArray = {" Map 1 ", " Map 2 ", " Map 3 ", " Map 4 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
@@ -49,13 +49,13 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String mapString = mapsComboBox.getSelectedItem().toString();
-                if (mapString == " Map 1 ")
+                if (mapString.equals(" Map 1 "))
                     map = 1;
-                else if (mapString == " Map 2 ")
+                else if (mapString.equals(" Map 2 "))
                     map = 2;
-                else if (mapString == " Map 3 ")
+                else if (mapString.equals(" Map 3 "))
                     map = 3;
-                else if (mapString == " Map 4 ")
+                else if (mapString.equals(" Map 4 "))
                     map = 4;
                 else
                     map = 0;
