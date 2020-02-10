@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class Rules {
     public Rules() {
         JFrame jFrame = new JFrame("Introduction");
+        JFrame.setDefaultLookAndFeelDecorated(true);
         jFrame.setBounds(0, 0, 500, 500);
 
         JPanel jPanel = new JPanel();
