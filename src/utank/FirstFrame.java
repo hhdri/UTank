@@ -80,7 +80,7 @@ public class FirstFrame {
         settingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Setting setting = new Setting();
             }
         });
 
@@ -94,6 +94,7 @@ public class FirstFrame {
         jPanel.add(winningTextField);
         jPanel.add(mapsComboBox);
         jPanel.add(enterGameButton);
+        jPanel.add(settingButton);
         jPanel.add(howToPlayButton);
         jFrame.add(jPanel);
         jFrame.setVisible(true);
