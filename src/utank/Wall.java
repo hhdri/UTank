@@ -59,6 +59,6 @@ public class Wall extends Thing {
                 repX = Math.max(this.i1, this.i2) - 4;
             }
         }
-        return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius()+2;
+        return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius()+5;
     }
 }
