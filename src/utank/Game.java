@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
-    //private static int WIN_POINT = 3;
     private int map;
     private List<PowerUp> powerUpsInTheAir = new ArrayList<>();
     private List<Thing> everyThing = new ArrayList<>();
@@ -15,14 +14,11 @@ public class Game extends JFrame {
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
     public Game(Player player1, Player player2, int winPoint, int map) {
-
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
-
-
 
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
         this.everyThing.add(leftEdge);
@@ -182,7 +178,6 @@ public class Game extends JFrame {
                 break;
         }
 
-
         int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
         player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
         this.everyThing.add(player1.getTank());
@@ -192,7 +187,7 @@ public class Game extends JFrame {
     }
 
 
-    private void newRoundHandler(Player player1, Player player2, int winPoint, int map, boolean wasDraw) {
+    private void newRoundHandler(Player player1, Player player2, int winPoint, boolean wasDraw) {
         shotsInTheAir.clear();
         powerUpsInTheAir.clear();
 
@@ -269,15 +264,13 @@ public class Game extends JFrame {
             }
             if (p1Tank.hadPowerUp) {
                 if (powerUp.contacts(p2Tank)) {
-                    this.newRoundHandler(player1, player2, winPoint, map, false);
-                    //p1Tank.hadPowerUp = false;
+                    this.newRoundHandler(player1, player2, winPoint, false);
                     break;
                 }
             }
             if (p2Tank.hadPowerUp) {
                 if (powerUp.contacts(p1Tank)) {
-                    this.newRoundHandler(player1, player2, winPoint, map, false);
-                    //p2Tank.hadPowerUp = false;
+                    this.newRoundHandler(player1, player2, winPoint, false);
                     break;
                 }
             }
@@ -287,35 +280,26 @@ public class Game extends JFrame {
 
 
         for (Shot shot : this.shotsInTheAir) {
-            shot.step();
+            shot.calculateVelocity();
             for (Wall wall : this.walls) {
                 if (wall.contacts(shot)) {
                     shot.bounceAgainst(wall);
                 }
             }
+            shot.step();
             if (p1Tank.contacts(shot)) {
-                this.newRoundHandler(player1, player2, winPoint, map, false);
+                this.newRoundHandler(player1, player2, winPoint, false);
                 break;  // so can't use this loop anymore (and we don't need to)
             }
             if (p2Tank.contacts(shot)) {
-                this.newRoundHandler(player1, player2, winPoint, map, false);
+                this.newRoundHandler(player1, player2, winPoint, false);
                 break;
             }
 
         }
         if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty()) {
-            this.everyThing.remove(p2Tank);
-            this.everyThing.remove(p1Tank);
-            int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-            player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
-            this.everyThing.add(player1.getTank());
-            int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-            player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
-            this.everyThing.add(player2.getTank());
-            this.newRoundHandler(player1, player2, -1, map, true);
-            shotsInTheAir.clear();
+            this.newRoundHandler(player1, player2, -1, true);
         }
-
         this.shotsInTheAir.forEach(Shot::growOld);
         this.shotsInTheAir.removeIf(Shot::isDead);
 
@@ -325,7 +309,6 @@ public class Game extends JFrame {
             p1Tank.calculateVelocity();
             if (p1Tank.contacts(p2Tank)) {
                 p1Tank.blockedBy(p2Tank);
-                p2Tank.blockedBy(p1Tank);
             }
             for (Wall wall : walls)
                 if (wall.contacts(p1Tank)) {
@@ -356,7 +339,6 @@ public class Game extends JFrame {
         if (listener.p2Move) {
             p2Tank.calculateVelocity();
             if (p1Tank.contacts(p2Tank)) {
-                p1Tank.blockedBy(p2Tank);
                 p2Tank.blockedBy(p1Tank);
             }
             for (Wall wall : walls)

@@ -34,7 +34,7 @@ public class Player {
 
         for (int i = 0; i < everything.size(); i++) {
             if (everything.get(i) instanceof Tank) {
-                int[] props = {((Tank) everything.get(i)).getRoundedX(), ((Tank) everything.get(i)).getRoundedY(), ((Tank) everything.get(i)).RADIUS};
+                int[] props = {((Tank) everything.get(i)).getRoundedX(), ((Tank) everything.get(i)).getRoundedY(), Tank.RADIUS};
                 int[] borderPointsX = {props[0] - (8) * props[2], props[0] + (8) * props[2]};
                 int[] borderPointsY = {props[1] - (8) * props[2], props[1] + (8) * props[2]};
                 if (borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
