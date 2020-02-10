@@ -25,7 +25,9 @@ public class FirstFrame {
         JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(2);
         JTextField shotsTextField = new JTextField(2);
-        ButtonGroup buttonGroup = new ButtonGroup();
+        ButtonGroup playerOneButtonGroup = new ButtonGroup();
+        ButtonGroup playerTwoButtonGroup = new ButtonGroup();
+
 
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
@@ -33,8 +35,10 @@ public class FirstFrame {
         JRadioButton jRadioButton2 = new JRadioButton(" Z S X C");
         JRadioButton jRadioButton3 = new JRadioButton("S E D F");
         JRadioButton jRadioButton4 = new JRadioButton("J I K L");
-        buttonGroup.add(jRadioButton1);
-        buttonGroup.add(jRadioButton2);
+        playerOneButtonGroup.add(jRadioButton1);
+        playerOneButtonGroup.add(jRadioButton2);
+        playerTwoButtonGroup.add(jRadioButton3);
+        playerTwoButtonGroup.add(jRadioButton4);
         String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 ", " Map 4 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
         JButton enterGameButton = new JButton("Enter Game");
@@ -118,6 +122,7 @@ public class FirstFrame {
         jPanel.add(settingButton);
         jPanel.add(howToPlayButton);
         jFrame.add(jPanel);
+
         jFrame.setVisible(true);
 
     }
