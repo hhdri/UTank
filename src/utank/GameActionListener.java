@@ -1,6 +1,5 @@
 package utank;
 
-import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -16,7 +15,6 @@ public class GameActionListener extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_M:
-
                 FirstFrame firstFrame = new FirstFrame();
 
             case KeyEvent.VK_LEFT:

@@ -12,6 +12,7 @@ public class FirstFrame {
         JFrame jFrame = new JFrame();
         JFrame.setDefaultLookAndFeelDecorated(true);
         jFrame.setBounds(0, 0, 520, 500);
+        jFrame.setResizable(false);
         JPanel jPanel = new JPanel();
         JLabel welcome = new JLabel("Welcome to UTank. ", SwingConstants.CENTER);
         welcome.setBounds(200, 200, 100, 30);
@@ -24,10 +25,17 @@ public class FirstFrame {
         JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(2);
         JTextField shotsTextField = new JTextField(2);
+        ButtonGroup buttonGroup = new ButtonGroup();
 
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
-        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 " , " Map 4 "};
+        JRadioButton jRadioButton1 = new JRadioButton("A W S D");
+        JRadioButton jRadioButton2 = new JRadioButton(" Z S X C");
+        JRadioButton jRadioButton3 = new JRadioButton("S E D F");
+        JRadioButton jRadioButton4 = new JRadioButton("J I K L");
+        buttonGroup.add(jRadioButton1);
+        buttonGroup.add(jRadioButton2);
+        String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 ", " Map 4 "};
         JComboBox mapsComboBox = new JComboBox(mapsArray);
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
@@ -36,8 +44,8 @@ public class FirstFrame {
         mapsComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String mapString =  mapsComboBox.getSelectedItem().toString();
-                if ( mapString == " Map 1 ")
+                String mapString = mapsComboBox.getSelectedItem().toString();
+                if (mapString == " Map 1 ")
                     map = 1;
                 else if (mapString == " Map 2 ")
                     map = 2;
@@ -99,6 +107,13 @@ public class FirstFrame {
         jPanel.add(shotsLabel);
         jPanel.add(shotsTextField);
         jPanel.add(mapsComboBox);
+        jPanel.add(playerOneKeys);
+
+        jPanel.add(jRadioButton1);
+        jPanel.add(jRadioButton2);
+        jPanel.add(playerTwoKeys);
+        jPanel.add(jRadioButton3);
+        jPanel.add(jRadioButton4);
         jPanel.add(enterGameButton);
         jPanel.add(settingButton);
         jPanel.add(howToPlayButton);
