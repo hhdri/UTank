@@ -21,10 +21,11 @@ public class Game extends JFrame {
     private List<Shot> shotsInTheAir = new ArrayList<>();
 
     public Game(Player player1, Player player2, int winPoint, int map) {
-        JFrame.setDefaultLookAndFeelDecorated(true);
+
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         PowerUp test = new PowerUp(50, 50, PowerUpType.MINE);
         this.everyThing.add(test);
         this.powerUpsInTheAir.add(test);
@@ -223,12 +224,13 @@ public class Game extends JFrame {
         listener.p2Move = false;
 
         if (player1.getPoints() == winPoint) {
-
+            BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             FirstFrame firstFrame = new FirstFrame();
         } else if (player2.getPoints() == winPoint) {
+            BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
 
             /*JButton newGameButton = new JButton("New Game");
