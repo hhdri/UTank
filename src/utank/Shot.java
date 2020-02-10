@@ -15,7 +15,14 @@ public class Shot extends MovingThing {
     }
 
     void draw(Graphics graphics) {
-        graphics.drawLine(this.getRoundedX(), this.getRoundedY(), (int) Math.round(this.getX() + (Shot.RADIUS * Math.sin(this.direction))), (int) Math.round(this.getY() + (Shot.RADIUS * Math.cos(this.direction))));
+//        graphics.drawLine(this.getRoundedX(), this.getRoundedY(), (int) Math.round(this.getX() + (Shot.RADIUS * Math.sin(this.direction))), (int) Math.round(this.getY() + (Shot.RADIUS * Math.cos(this.direction))));
+        graphics.fillOval(
+                this.getRoundedX() - Shot.RADIUS + 7,
+                this.getRoundedY() - Shot.RADIUS + 7,
+                Shot.RADIUS * 2 - 15,
+                Shot.RADIUS * 2 - 15
+        );
+
     }
 
     void growOld() {

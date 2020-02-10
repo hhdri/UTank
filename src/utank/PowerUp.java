@@ -8,7 +8,7 @@ enum PowerUpType {
 
 public class PowerUp extends Thing {
     final static int RADIUS = 10;
-    final static int LIFE = 1100;
+    final static int LIFE = 500;
     int age;
     int time;
     PowerUpType type;
