@@ -157,8 +157,8 @@ public class Game extends JFrame {
                 this.walls.add(obstacle320);
                 break;
             case 4:
-                Wall obstacle41 = new Wall(400, 100, 40, true);
-                Wall obstacle42 = new Wall(100, 100, 300, true);
+                Wall obstacle41 = new Wall(400, 100, 180, true);
+                Wall obstacle42 = new Wall(100, 250, 180, true);
                 Wall obstacle43 = new Wall(200, 150, 80, true);
                 Wall obstacle44 = new Wall(200, 230, 100, false);
                 Wall obstacle45 = new Wall(300, 150, 80, true);
