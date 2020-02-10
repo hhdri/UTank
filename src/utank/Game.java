@@ -2,14 +2,8 @@ package utank;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
@@ -26,6 +20,7 @@ public class Game extends JFrame {
         this.setTitle("UTANK GAME");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
+
 
 
         Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
@@ -159,8 +154,8 @@ public class Game extends JFrame {
                 this.walls.add(obstacle320);
                 break;
             case 4:
-                Wall obstacle41 = new Wall(400, 100, 40, true);
-                Wall obstacle42 = new Wall(100, 100, 300, true);
+                Wall obstacle41 = new Wall(400, 100, 180, true);
+                Wall obstacle42 = new Wall(100, 250, 180, true);
                 Wall obstacle43 = new Wall(200, 150, 80, true);
                 Wall obstacle44 = new Wall(200, 230, 100, false);
                 Wall obstacle45 = new Wall(300, 150, 80, true);
@@ -234,20 +229,21 @@ public class Game extends JFrame {
 
         if (player1.getPoints() == winPoint) {
             BombSound bombSound = new BombSound();
-            JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
+            JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!  Player1 shots : " + ((Tank)player1.getTank()).getShotCounter() + " player2 shots : " + ((Tank)player2.getTank()).getShotCounter());
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             FirstFrame firstFrame = new FirstFrame();
         } else if (player2.getPoints() == winPoint) {
             BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
+            JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won! ") ;
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             FirstFrame firstFrame = new FirstFrame();
 
         } else {
             BombSound bombSound = new BombSound();
-            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : "         + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
 
         }
 

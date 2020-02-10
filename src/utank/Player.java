@@ -7,12 +7,14 @@ public class Player {
     private Tank tank;
     private int points = 0;
     private String name;
+    private int shotCounter;
     Color color;
 
 
-    public Player(String name, Color color) {
+    public Player(String name, Color color, int shotCounter) {
         this.color = color;
         this.name = name;
+        this.shotCounter = shotCounter;
     }
 
     public String getName() {
@@ -22,7 +24,7 @@ public class Player {
     void newRound(boolean hasWon, int startX, int startY) {
         if (hasWon)
             this.points = this.points + 1;
-        this.tank = new Tank(startX, startY, 0,this.color);
+        this.tank = new Tank(startX, startY, 0,this.color, this.shotCounter);
     }
 
     boolean checkContact(List<Thing> everything, int[] coords) {
