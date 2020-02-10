@@ -11,14 +11,6 @@ public class GameActionListener extends KeyAdapter {
 
     public GameActionListener() {
         super();
-//        p1Move = false;
-//        p1Left = false;
-//        p1Right = false;
-//        p1Fire = false;
-//        p2Move = false;
-//        p2Left = false;
-//        p2Right = false;
-//        p2Fire = false;
     }
 
     public void keyPressed(KeyEvent e) {
