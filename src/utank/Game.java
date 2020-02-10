@@ -18,6 +18,7 @@ public class Game extends JFrame {
 
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
+        this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
         PowerUp test = new PowerUp(50, 50, PowerUpType.MINE);

@@ -9,6 +9,7 @@ public class Rules {
         JFrame jFrame = new JFrame("Introduction");
         JFrame.setDefaultLookAndFeelDecorated(true);
         jFrame.setBounds(0, 0, 500, 500);
+        jFrame.setResizable(false);
 
         JPanel jPanel = new JPanel();
         JLabel text = new JLabel("The game consists of two tanks...............  Press m for menu");
