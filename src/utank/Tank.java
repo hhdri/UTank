@@ -6,15 +6,18 @@ import java.util.Map;
 public class Tank extends MovingThing {
     final static int RADIUS = 25;
     final static int GUN_LENGTH = 30;
-    int shotCounter = 10;
+    int shotCounter /*= 10*/;
     int shotTimer = 0;
     boolean hasPowerUp = false;
     boolean hadPowerUp = false;
     Color color;
-    Tank(int x, int y, float direction, Color color) {
+
+    Tank(int x, int y, float direction, Color color, int shotCounter) {
         super(x, y, direction, 2, (float) 0.03);
         this.color = color;
+        this.shotCounter = shotCounter;
     }
+
 
     public void draw(Graphics graphics) {
         graphics.setColor(color);
@@ -51,6 +54,13 @@ public class Tank extends MovingThing {
 
     int getGunY() {
         return (int) Math.round(this.getY() + (Tank.GUN_LENGTH * Math.cos(this.direction)));
+    }
+    public int getShotCounter() {
+        return shotCounter;
+    }
+
+    public void setShotCounter(int shotCounter) {
+        this.shotCounter = shotCounter;
     }
 
     @Override

@@ -15,12 +15,16 @@ public class FirstFrame {
         JPanel jPanel = new JPanel();
         JLabel welcome = new JLabel("Welcome to UTank. ", SwingConstants.CENTER);
         welcome.setBounds(200, 200, 100, 30);
-        JLabel winningPointLabel = new JLabel("Winning Point : ", SwingConstants.CENTER);
+
         JLabel playerOneLabel = new JLabel("Player 1 : ");
         JLabel playerTwoLabel = new JLabel("Player 2 : ");
+        JLabel winningPointLabel = new JLabel("Winning Point : ", SwingConstants.CENTER);
+        JLabel shotsLabel = new JLabel("Shots : ");
         JTextField playerOneTextField = new JTextField(5);
         JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(2);
+        JTextField shotsTextField = new JTextField(2);
+
         JLabel playerOneKeys = new JLabel("Player1 plays with : ");
         JLabel playerTwoKeys = new JLabel("Player2 plays with : ");
         String mapsArray[] = {" Map 1 ", " Map 2 ", " Map 3 " , " Map 4 "};
@@ -51,8 +55,8 @@ public class FirstFrame {
             @Override
             public void actionPerformed(ActionEvent a) {
                 jFrame.dispose();
-                Player player1 = new Player(playerOneTextField.getText(), Color.gray);
-                Player player2 = new Player(playerTwoTextField.getText(), Color.red);
+                Player player1 = new Player(playerOneTextField.getText(), Color.gray, Integer.parseInt(shotsTextField.getText()));
+                Player player2 = new Player(playerTwoTextField.getText(), Color.red, Integer.parseInt(shotsTextField.getText()));
                 Game game = new Game(player1, player2, Integer.parseInt(winningTextField.getText()), map);
 
 
@@ -92,6 +96,8 @@ public class FirstFrame {
         jPanel.add(playerTwoTextField);
         jPanel.add(winningPointLabel);
         jPanel.add(winningTextField);
+        jPanel.add(shotsLabel);
+        jPanel.add(shotsTextField);
         jPanel.add(mapsComboBox);
         jPanel.add(enterGameButton);
         jPanel.add(settingButton);
