@@ -11,7 +11,7 @@ public class Tank extends MovingThing {
     Color color;
 
     Tank(int x, int y, float direction, Color color, int shotCounter) {
-        super(x, y, direction, 2, (float) 0.03);
+        super(x, y, direction, 5, (float) 0.075);
         this.color = color;
         this.shotCounter = shotCounter;
     }

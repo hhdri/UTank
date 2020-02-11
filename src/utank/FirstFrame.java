@@ -91,7 +91,7 @@ public class FirstFrame {
                 game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
                 new Timer(
-                        10,
+                        30,
                         e -> {
                             game.updateState(player1, player2);
                             game.repaint();

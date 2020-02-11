@@ -11,7 +11,7 @@ enum RoundState {
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
-    private final static double MINE_FREQUENCY = 0.0007;
+    private final static double MINE_FREQUENCY = 0.0028;
     private int map;
     private List<PowerUp> powerUpsInTheAir = new ArrayList<>();
     private List<Thing> everyThing = new ArrayList<>();
@@ -35,7 +35,6 @@ public class Game extends JFrame {
 
     private void newRoundHandler(Player player1, Player player2, RoundState roundState) {
         timeToNextMine = (int) Math.round(Math.log(1 - Math.random()) / (-MINE_FREQUENCY));
-        System.out.println(timeToNextMine);
 
         if (roundState == RoundState.FirstRound) {
             Map mapWalls = new Map(this.map);
@@ -98,7 +97,6 @@ public class Game extends JFrame {
             this.powerUpsInTheAir.add(test);
 
             timeToNextMine = (int) Math.round(Math.log(1 - Math.random()) / (-MINE_FREQUENCY));
-            System.out.println(timeToNextMine);
         }
 
         Tank p1Tank = (Tank) player1.getTank();
