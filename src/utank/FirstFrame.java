@@ -46,6 +46,8 @@ public class FirstFrame {
         JComboBox mapsComboBox = new JComboBox(mapsArray);
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
+        JButton exitButton = new JButton("Exit");
+
 
         mapsComboBox.addActionListener(new ActionListener() {
             @Override
@@ -102,6 +104,13 @@ public class FirstFrame {
                 Rules rules = new Rules();
             }
         });
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrame.dispose();
+                jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            }
+        });
 
 
         jPanel.add(welcome);
@@ -122,6 +131,7 @@ public class FirstFrame {
         jPanel.add(jRadioButton4);
         jPanel.add(enterGameButton);
         jPanel.add(howToPlayButton);
+        jPanel.add(exitButton);
         jFrame.add(jPanel);
 
         jFrame.setVisible(true);
