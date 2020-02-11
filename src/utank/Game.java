@@ -215,7 +215,7 @@ public class Game extends JFrame {
         }
         else if (player1.getPoints() == winPoint) {
             BombSound bombSound = new BombSound();
-            JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!  Player1 shots : " + ((Tank)player1.getTank()).getShotCounter() + " player2 shots : " + ((Tank)player2.getTank()).getShotCounter());
+            JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!");
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             FirstFrame firstFrame = new FirstFrame();
