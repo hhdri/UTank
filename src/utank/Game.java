@@ -26,169 +26,18 @@ public class Game extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JFrame.setDefaultLookAndFeelDecorated(true);
 
-        Wall leftEdge = new Wall(20, 45, Game.HEIGHT - 65, true);
-        this.everyThing.add(leftEdge);
-        this.walls.add(leftEdge);
-        Wall topEdge = new Wall(20, 45, Game.WIDTH - 40, false);
-        this.everyThing.add(topEdge);
-        this.walls.add(topEdge);
-        Wall rightEdge = new Wall(Game.WIDTH - 20, 45, Game.HEIGHT - 65, true);
-        this.everyThing.add(rightEdge);
-        this.walls.add(rightEdge);
-        Wall bottomEdge = new Wall(20, Game.HEIGHT - 20, Game.WIDTH - 39, false);
-        this.everyThing.add(bottomEdge);
-        this.walls.add(bottomEdge);
-
-        switch (map) {
-            case 0:
-                break;
-            case 1:
-                Wall obstacle11 = new Wall(190, 100, 110, true);
-                Wall obstacle12 = new Wall(80, 210, 110, false);
-                Wall obstacle13 = new Wall(310, 100, 110, true);
-                Wall obstacle14 = new Wall(310, 210, 110, false);
-                Wall obstacle15 = new Wall(80, 300, 110, false);
-                Wall obstacle16 = new Wall(190, 300, 110, true);
-                Wall obstacle17 = new Wall(310, 300, 100, false);
-                Wall obstacle18 = new Wall(310, 300, 110, true);
-                this.everyThing.add(obstacle11);
-                this.walls.add(obstacle11);
-                this.everyThing.add(obstacle12);
-                this.walls.add(obstacle12);
-                this.everyThing.add(obstacle13);
-                this.walls.add(obstacle13);
-                this.everyThing.add(obstacle14);
-                this.walls.add(obstacle14);
-                this.everyThing.add(obstacle15);
-                this.walls.add(obstacle15);
-                this.everyThing.add(obstacle16);
-                this.walls.add(obstacle16);
-                this.everyThing.add(obstacle17);
-                this.walls.add(obstacle17);
-                this.everyThing.add(obstacle18);
-                this.walls.add(obstacle18);
-                break;
-            case 2:
-                Wall obstacle21 = new Wall(100, 100, 300, false);
-                Wall obstacle22 = new Wall(400, 100, 200, true);
-                Wall obstacle23 = new Wall(150, 200, 200, true);
-                Wall obstacle24 = new Wall(150, 400, 250, false);
-                Wall obstacle25 = new Wall(250, 230, 50, false);
-                Wall obstacle26 = new Wall(300, 230, 50, true);
-                Wall obstacle27 = new Wall(250, 230, 50, true);
-                Wall obstacle28 = new Wall(250, 280, 50, false);
-                this.everyThing.add(obstacle21);
-                this.walls.add(obstacle21);
-                this.everyThing.add(obstacle22);
-                this.walls.add(obstacle22);
-                this.everyThing.add(obstacle23);
-                this.walls.add(obstacle23);
-                this.everyThing.add(obstacle24);
-                this.walls.add(obstacle24);
-                this.everyThing.add(obstacle25);
-                this.walls.add(obstacle25);
-                this.everyThing.add(obstacle26);
-                this.walls.add(obstacle26);
-                this.everyThing.add(obstacle27);
-                this.walls.add(obstacle27);
-                this.everyThing.add(obstacle28);
-                this.walls.add(obstacle28);
-                break;
-            case 3:
-                Wall obstacle31 = new Wall(100, 100, 80, false);
-                Wall obstacle32 = new Wall(180, 100, 80, true);
-                Wall obstacle33 = new Wall(100, 100, 80, true);
-                Wall obstacle34 = new Wall(100, 180, 80, false);
-                Wall obstacle35 = new Wall(330, 100, 80, false);
-                Wall obstacle36 = new Wall(410, 100, 80, true);
-                Wall obstacle37 = new Wall(330, 100, 80, true);
-                Wall obstacle38 = new Wall(330, 180, 80, false);
-                Wall obstacle39 = new Wall(100, 330, 80, false);
-                Wall obstacle310 = new Wall(180, 330, 80, true);
-                Wall obstacle311 = new Wall(100, 330, 80, true);
-                Wall obstacle312 = new Wall(100, 410, 80, false);
-                Wall obstacle313 = new Wall(330, 330, 80, false);
-                Wall obstacle314 = new Wall(410, 330, 80, true);
-                Wall obstacle315 = new Wall(330, 330, 80, true);
-                Wall obstacle316 = new Wall(330, 410, 80, false);
-                Wall obstacle317 = new Wall(235, 235, 40, false);
-                Wall obstacle318 = new Wall(235, 235, 40, true);
-                Wall obstacle319 = new Wall(275, 235, 40, true);
-                Wall obstacle320 = new Wall(235, 275, 40, false);
-                this.everyThing.add(obstacle31);
-                this.walls.add(obstacle31);
-                this.everyThing.add(obstacle32);
-                this.walls.add(obstacle32);
-                this.everyThing.add(obstacle33);
-                this.walls.add(obstacle33);
-                this.everyThing.add(obstacle34);
-                this.walls.add(obstacle34);
-                this.everyThing.add(obstacle35);
-                this.walls.add(obstacle35);
-                this.everyThing.add(obstacle36);
-                this.walls.add(obstacle36);
-                this.everyThing.add(obstacle37);
-                this.walls.add(obstacle37);
-                this.everyThing.add(obstacle38);
-                this.walls.add(obstacle38);
-                this.everyThing.add(obstacle39);
-                this.walls.add(obstacle39);
-                this.everyThing.add(obstacle310);
-                this.walls.add(obstacle310);
-                this.everyThing.add(obstacle311);
-                this.walls.add(obstacle311);
-                this.everyThing.add(obstacle312);
-                this.walls.add(obstacle312);
-                this.everyThing.add(obstacle313);
-                this.walls.add(obstacle313);
-                this.everyThing.add(obstacle314);
-                this.walls.add(obstacle314);
-                this.everyThing.add(obstacle315);
-                this.walls.add(obstacle315);
-                this.everyThing.add(obstacle316);
-                this.walls.add(obstacle316);
-                this.everyThing.add(obstacle317);
-                this.walls.add(obstacle317);
-                this.everyThing.add(obstacle318);
-                this.walls.add(obstacle318);
-                this.everyThing.add(obstacle319);
-                this.walls.add(obstacle319);
-                this.everyThing.add(obstacle320);
-                this.walls.add(obstacle320);
-                break;
-            case 4:
-                Wall obstacle41 = new Wall(400, 100, 180, true);
-                Wall obstacle42 = new Wall(100, 250, 180, true);
-                Wall obstacle43 = new Wall(200, 150, 80, true);
-                Wall obstacle44 = new Wall(200, 230, 100, false);
-                Wall obstacle45 = new Wall(300, 150, 80, true);
-                Wall obstacle46 = new Wall(200, 330, 80, true);
-                Wall obstacle47 = new Wall(200, 330, 100, false);
-                Wall obstacle48 = new Wall(300, 330, 80, true);
-                this.everyThing.add(obstacle41);
-                this.walls.add(obstacle41);
-                this.everyThing.add(obstacle42);
-                this.walls.add(obstacle42);
-                this.everyThing.add(obstacle43);
-                this.walls.add(obstacle43);
-                this.everyThing.add(obstacle44);
-                this.walls.add(obstacle44);
-                this.everyThing.add(obstacle45);
-                this.walls.add(obstacle45);
-                this.everyThing.add(obstacle46);
-                this.walls.add(obstacle46);
-                this.everyThing.add(obstacle47);
-                this.walls.add(obstacle47);
-                this.everyThing.add(obstacle48);
-                this.walls.add(obstacle48);
-                break;
-        }
-
         newRoundHandler(player1, player2, RoundState.FirstRound);
     }
 
 
     private void newRoundHandler(Player player1, Player player2, RoundState roundState) {
+        if (roundState == RoundState.FirstRound) {
+            Map mapWalls = new Map(map);
+            this.everyThing.addAll(mapWalls.defaultWalls);
+            this.walls.addAll(mapWalls.defaultWalls);
+            this.everyThing.addAll(mapWalls.mapWalls);
+            this.walls.addAll(mapWalls.mapWalls);
+        }
         if (roundState != RoundState.FirstRound) {
             new BombSound();
             shotsInTheAir.clear();
@@ -294,7 +143,7 @@ public class Game extends JFrame {
             shot.step();
             if (p1Tank.contacts(shot)) {
                 this.newRoundHandler(player1, player2, RoundState.Player2Won);
-                break;  // so can't use this loop anymore (and we don't need to)
+                break;
             }
             if (p2Tank.contacts(shot)) {
                 this.newRoundHandler(player1, player2, RoundState.Player1Won);
