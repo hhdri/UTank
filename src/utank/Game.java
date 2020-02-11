@@ -54,7 +54,7 @@ public class Game extends JFrame {
             this.everyThing.remove(p1Tank);
 
             GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
-            //listener.resetVariables();
+            listener.resetVariables();
         }
 
         int player1AddedPoint = 0, player2AddedPoint = 0;
