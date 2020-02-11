@@ -8,6 +8,17 @@ public class GameActionListener extends KeyAdapter {
             p2Move, p2Left, p2Right, p2Fire,
             escape;
 
+    public void resetVariables() {
+        this.p1Fire = false;
+        this.p1Right = false;
+        this.p1Left = false;
+        this.p1Move = false;
+        this.p2Fire = false;
+        this.p2Right = false;
+        this.p2Left = false;
+        this.p2Move = false;
+    }
+
     public GameActionListener() {
         super();
     }

@@ -19,6 +19,7 @@ public class Game extends JFrame {
     private int winPoint;
 
     public Game(Player player1, Player player2, int winPoint, int map) {
+        this.map = map;
         this.winPoint = winPoint;
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
@@ -32,7 +33,7 @@ public class Game extends JFrame {
 
     private void newRoundHandler(Player player1, Player player2, RoundState roundState) {
         if (roundState == RoundState.FirstRound) {
-            Map mapWalls = new Map(map);
+            Map mapWalls = new Map(this.map);
             this.everyThing.addAll(mapWalls.defaultWalls);
             this.walls.addAll(mapWalls.defaultWalls);
             this.everyThing.addAll(mapWalls.mapWalls);
@@ -48,14 +49,7 @@ public class Game extends JFrame {
             this.everyThing.remove(p1Tank);
 
             GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
-            listener.p1Fire = false;
-            listener.p1Right = false;
-            listener.p1Left = false;
-            listener.p1Move = false;
-            listener.p2Fire = false;
-            listener.p2Right = false;
-            listener.p2Left = false;
-            listener.p2Move = false;
+            listener.resetVariables();
         }
 
         PowerUp test = new PowerUp(50, 50, PowerUpType.MINE);
