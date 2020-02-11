@@ -46,11 +46,6 @@ public class FirstFrame {
         JComboBox mapsComboBox = new JComboBox(mapsArray);
         JButton enterGameButton = new JButton("Enter Game");
         JButton howToPlayButton = new JButton("How to play");
-        JButton settingButton = new JButton("Setting");
-
-
-
-
 
         mapsComboBox.addActionListener(new ActionListener() {
             @Override
@@ -107,12 +102,6 @@ public class FirstFrame {
                 Rules rules = new Rules();
             }
         });
-        settingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Setting setting = new Setting();
-            }
-        });
 
 
         jPanel.add(welcome);
@@ -126,14 +115,12 @@ public class FirstFrame {
         jPanel.add(shotsTextField);
         jPanel.add(mapsComboBox);
         jPanel.add(playerOneKeys);
-
         jPanel.add(jRadioButton1);
         jPanel.add(jRadioButton2);
         jPanel.add(playerTwoKeys);
         jPanel.add(jRadioButton3);
         jPanel.add(jRadioButton4);
         jPanel.add(enterGameButton);
-        jPanel.add(settingButton);
         jPanel.add(howToPlayButton);
         jFrame.add(jPanel);
 
