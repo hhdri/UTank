@@ -2,45 +2,61 @@ package utank;
 
 import java.awt.*;
 
-enum PowerUpType {
-    FRAG_BOMB, MINE, LASER
+enum PowerUpStatus {
+    UnPicked, Picked, Landed
 }
 
-public class PowerUp extends Thing {
+public class PowerUp extends Thing { // PowerUp solely means land mine
     final static int RADIUS = 10;
-    final static int LIFE = 500;
+    final static int LIFE = 1000;
     int age;
-    int time;
-    PowerUpType type;
+    PowerUpStatus powerUpStatus;
+    Tank carrier;
 
-    PowerUp(float x, float y, PowerUpType type) {
+    PowerUp(float x, float y) {
         super(x, y);
         this.age = LIFE;
-        this.type = type;
+        this.powerUpStatus = PowerUpStatus.UnPicked;
+    }
+
+    void setPicked(Tank carrier) {
+        this.powerUpStatus = PowerUpStatus.Picked;
+        this.carrier = carrier;
+    }
+
+    void setLanded () {
+        this.powerUpStatus = PowerUpStatus.Landed;
+        this.x = this.carrier.getRoundedX();
+        this.y = this.carrier.getRoundedY();
     }
 
     void growOld() {
-        this.age = this.age - 1;
+        if (powerUpStatus == PowerUpStatus.Picked)
+            this.age = this.age - 1;
     }
-    boolean isDead() { return this.age <= 0; }
+
+    boolean isDead() {
+        if (powerUpStatus == PowerUpStatus.Picked)
+            return this.age == 0;
+        else
+            return false;
+    }
 
     void draw(Graphics graphics) {
-        switch (this.type) {
-            case FRAG_BOMB:
-                graphics.setColor(Color.cyan);
+        switch (powerUpStatus) {
+            case UnPicked:
+                graphics.setColor(Color.blue);
+                graphics.fillOval(this.getRoundedX() , this.getRoundedY(), PowerUp.RADIUS, PowerUp.RADIUS);
+                graphics.setColor(Color.black);
                 break;
-            case MINE:
-                graphics.setColor(Color.red);
-                break;
-            case LASER:
-                graphics.setColor(Color.gray);
+            case Picked:
+                graphics.setColor(Color.blue);
+                graphics.fillOval(this.carrier.getRoundedX(), this.carrier.getRoundedY(), PowerUp.RADIUS, PowerUp.RADIUS);
+                graphics.setColor(Color.black);
+            case Landed:
                 break;
         }
-        graphics.setColor(Color.blue);
-        graphics.fillOval(this.getRoundedX() , this.getRoundedY(), PowerUp.RADIUS, PowerUp.RADIUS);
-        graphics.setColor(Color.black);
     }
-
 
     boolean contacts(MovingThing moving) {
         float delta_x = moving.x - this.x;
