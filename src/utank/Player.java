@@ -30,7 +30,6 @@ public class Player {
         boolean hasContactWithWall = false;
         boolean hasContactWithTank = false;
         boolean hasContactWithPowerUp = false;
-
         for (int i = 0; i < everything.size(); i++) {
             if (everything.get(i) instanceof Tank) {
                 int[] props = {((Tank) everything.get(i)).getRoundedX(), ((Tank) everything.get(i)).getRoundedY(), Tank.RADIUS};
@@ -42,8 +41,8 @@ public class Player {
                 }
             } else if (everything.get(i) instanceof PowerUp) {
                 int[] props = {((PowerUp) everything.get(i)).getRoundedX(), ((PowerUp) everything.get(i)).getRoundedY(), ((PowerUp) everything.get(i)).RADIUS};
-                int[] borderPointsX = {props[0] - (8) * props[2], props[0] + (8) * props[2]};
-                int[] borderPointsY = {props[1] - (8) * props[2], props[1] + (8) * props[2]};
+                int[] borderPointsX = {props[0] - (3) * props[2], props[0] + (3) * props[2]};
+                int[] borderPointsY = {props[1] - (3) * props[2], props[1] + (3) * props[2]};
                 if (borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
                         borderPointsY[0] <= coords[1] && coords[1] <= borderPointsY[1]) {
                     hasContactWithPowerUp = true;

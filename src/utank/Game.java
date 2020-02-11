@@ -19,6 +19,7 @@ public class Game extends JFrame {
     private List<Shot> shotsInTheAir = new ArrayList<>();
     private int winPoint;
     private int timeToNextMine;
+    PowerUp powerUpCoords = new PowerUp(0,0);
 
     public Game(Player player1, Player player2, int winPoint, int map) {
         this.map = map;
@@ -92,7 +93,7 @@ public class Game extends JFrame {
     public void updateState(Player player1, Player player2) {
         timeToNextMine--;
         if (timeToNextMine == 0) {
-            int[] powerUpCoordinates = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+            int[] powerUpCoordinates = powerUpCoords.getCoordinates(everyThing, WIDTH, HEIGHT);
             PowerUp test = new PowerUp(powerUpCoordinates[0], powerUpCoordinates[1]);
             this.powerUpsInTheAir.add(test);
 
