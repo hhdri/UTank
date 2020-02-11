@@ -5,6 +5,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+enum RoundState {
+    Player1Won, Player2Won, WasDraw, FirstRound
+}
+
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
     private int map;
@@ -12,8 +16,10 @@ public class Game extends JFrame {
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
     private List<Shot> shotsInTheAir = new ArrayList<>();
+    private int winPoint;
 
     public Game(Player player1, Player player2, int winPoint, int map) {
+        this.winPoint = winPoint;
         this.setSize(Game.WIDTH, Game.HEIGHT);
         this.setTitle("UTANK GAME");
         this.setResizable(false);
@@ -178,69 +184,68 @@ public class Game extends JFrame {
                 break;
         }
 
-        int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-        player1.newRound(false, coordinatesP1[0], coordinatesP1[1]);
-        this.everyThing.add(player1.getTank());
-        int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-        player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
-        this.everyThing.add(player2.getTank());
+        newRoundHandler(player1, player2, RoundState.FirstRound);
     }
 
 
-    private void newRoundHandler(Player player1, Player player2, int winPoint, boolean wasDraw) {
-        shotsInTheAir.clear();
-        powerUpsInTheAir.clear();
+    private void newRoundHandler(Player player1, Player player2, RoundState roundState) {
+        if (roundState != RoundState.FirstRound) {
+            new BombSound();
+            shotsInTheAir.clear();
+            powerUpsInTheAir.clear();
+            Tank p1Tank = (Tank) player1.getTank();
+            Tank p2Tank = (Tank) player2.getTank();
+            this.everyThing.remove(p2Tank);
+            this.everyThing.remove(p1Tank);
 
-        Tank p1Tank = (Tank) player1.getTank();
-        Tank p2Tank = (Tank) player2.getTank();
-        this.everyThing.remove(p2Tank);
-        this.everyThing.remove(p1Tank);
+            GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
+            listener.p1Fire = false;
+            listener.p1Right = false;
+            listener.p1Left = false;
+            listener.p1Move = false;
+            listener.p2Fire = false;
+            listener.p2Right = false;
+            listener.p2Left = false;
+            listener.p2Move = false;
+        }
 
         PowerUp test = new PowerUp(50, 50, PowerUpType.MINE);
-        this.everyThing.add(test);
         this.powerUpsInTheAir.add(test);
 
-        GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
-        listener.p1Fire = false;
-        listener.p1Right = false;
-        listener.p1Left = false;
-        listener.p1Move = false;
-        listener.p2Fire = false;
-        listener.p2Right = false;
-        listener.p2Left = false;
-        listener.p2Move = false;
+        int player1AddedPoint = 0, player2AddedPoint = 0;
+        if (roundState == RoundState.Player1Won)
+            player1AddedPoint++;
+        if (roundState == RoundState.Player2Won)
+            player2AddedPoint++;
 
-        if (wasDraw) {
+        int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+        player1.newRound(player1AddedPoint, coordinatesP1[0], coordinatesP1[1]);
+        this.everyThing.add(player1.getTank());
+        int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
+        player2.newRound(player2AddedPoint, coordinatesP2[0], coordinatesP2[1]);
+        this.everyThing.add(player2.getTank());
+
+        if (roundState == RoundState.WasDraw) {
             JOptionPane.showMessageDialog(this, " Equal !");
         }
         else if (player1.getPoints() == winPoint) {
-            BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "Player1 : " + player1.getName() + " won!  Player1 shots : " + ((Tank)player1.getTank()).getShotCounter() + " player2 shots : " + ((Tank)player2.getTank()).getShotCounter());
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            FirstFrame firstFrame = new FirstFrame();
+            new FirstFrame();
         } else if (player2.getPoints() == winPoint) {
-            BombSound bombSound = new BombSound();
             JOptionPane.showMessageDialog(this, "Player2 : " + player2.getName() + " won!");
             this.dispose();
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            FirstFrame firstFrame = new FirstFrame();
+            new FirstFrame();
 
-        } else {
-            BombSound bombSound = new BombSound();
-            JOptionPane.showMessageDialog(this, "New Round! Player1 : "         + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
-
+        } else if (roundState == RoundState.Player1Won || roundState == RoundState.Player2Won){
+            JOptionPane.showMessageDialog(this, "New Round! Player1 : " + player1.getName() + " " + player1.getPoints() + " Player2 : " + player2.getName() + " " + player2.getPoints());
         }
 
-        int[] coordinatesP1 = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-        player1.newRound(true, coordinatesP1[0], coordinatesP1[1]);
-        this.everyThing.add(player1.getTank());
-        int[] coordinatesP2 = player2.getCoordinates(everyThing, WIDTH, HEIGHT);
-        player2.newRound(false, coordinatesP2[0], coordinatesP2[1]);
-        this.everyThing.add(player2.getTank());
     }
 
-    public void updateState(Player player1, Player player2, int winPoint) {
+    public void updateState(Player player1, Player player2) {
         Tank p1Tank = (Tank) player1.getTank();
         Tank p2Tank = (Tank) player2.getTank();
 
@@ -264,13 +269,13 @@ public class Game extends JFrame {
             }
             if (p1Tank.hadPowerUp) {
                 if (powerUp.contacts(p2Tank)) {
-                    this.newRoundHandler(player1, player2, winPoint, false);
+                    this.newRoundHandler(player1, player2, RoundState.Player1Won);
                     break;
                 }
             }
             if (p2Tank.hadPowerUp) {
                 if (powerUp.contacts(p1Tank)) {
-                    this.newRoundHandler(player1, player2, winPoint, false);
+                    this.newRoundHandler(player1, player2, RoundState.Player2Won);
                     break;
                 }
             }
@@ -288,17 +293,17 @@ public class Game extends JFrame {
             }
             shot.step();
             if (p1Tank.contacts(shot)) {
-                this.newRoundHandler(player1, player2, winPoint, false);
+                this.newRoundHandler(player1, player2, RoundState.Player2Won);
                 break;  // so can't use this loop anymore (and we don't need to)
             }
             if (p2Tank.contacts(shot)) {
-                this.newRoundHandler(player1, player2, winPoint, false);
+                this.newRoundHandler(player1, player2, RoundState.Player1Won);
                 break;
             }
 
         }
         if (p2Tank.shotCounter == 0 && p1Tank.shotCounter == 0 && shotsInTheAir.isEmpty()) {
-            this.newRoundHandler(player1, player2, -1, true);
+            this.newRoundHandler(player1, player2, RoundState.WasDraw);
         }
         this.shotsInTheAir.forEach(Shot::growOld);
         this.shotsInTheAir.removeIf(Shot::isDead);
@@ -372,6 +377,7 @@ public class Game extends JFrame {
         super.paint(graphics);
         this.everyThing.forEach(thing -> thing.draw(graphics));
         this.shotsInTheAir.forEach(shot -> shot.draw(graphics));
+        this.powerUpsInTheAir.forEach(powerUp -> powerUp.draw(graphics));
         Toolkit.getDefaultToolkit().sync();
     }
 }

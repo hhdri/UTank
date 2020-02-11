@@ -79,7 +79,7 @@ public class FirstFrame {
                 new Timer(
                         10,
                         e -> {
-                            game.updateState(player1, player2, Integer.parseInt(winningTextField.getText()));
+                            game.updateState(player1, player2);
                             game.repaint();
                         }
                 ).start();

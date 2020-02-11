@@ -21,10 +21,9 @@ public class Player {
         return name;
     }
 
-    void newRound(boolean hasWon, int startX, int startY) {
-        if (hasWon)
-            this.points = this.points + 1;
-        this.tank = new Tank(startX, startY, 0,this.color, this.shotCounter);
+    void newRound(int addedPoint, int startX, int startY) {
+        this.points += addedPoint;
+        this.tank = new Tank(startX, startY, 0, this.color, this.shotCounter);
     }
 
     boolean checkContact(List<Thing> everything, int[] coords) {
