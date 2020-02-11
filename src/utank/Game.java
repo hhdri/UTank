@@ -52,7 +52,8 @@ public class Game extends JFrame {
             listener.resetVariables();
         }
 
-        PowerUp test = new PowerUp(50, 50);
+        int[] powerUpCoordinates = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+        PowerUp test = new PowerUp(powerUpCoordinates[0], powerUpCoordinates[1]);
         this.powerUpsInTheAir.add(test);
 
         int player1AddedPoint = 0, player2AddedPoint = 0;
@@ -181,19 +182,6 @@ public class Game extends JFrame {
                 p1Tank.shotCounter -= 1;
                 p1Tank.shotTimer = 50;
             }
-//            if (p1Tank.hasPowerUp) {
-//                PowerUp test2 = new PowerUp(p1Tank.getGunX(), p1Tank.getGunY(), PowerUpType.MINE);
-//                this.powerUpsInTheAir.add(test2);
-//                p1Tank.hasPowerUp = false;
-//                p1Tank.hadPowerUp = true;
-//                p1Tank.shotTimer = 50;
-//            } else if (p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
-//                Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
-//                this.shotsInTheAir.add(shotP1);
-//                listener.p1Fire = false;
-//                p1Tank.shotCounter -= 1;
-//                p1Tank.shotTimer = 50;
-//            }
         }
         if (listener.p2Move) {
             p2Tank.calculateVelocity();
@@ -226,19 +214,6 @@ public class Game extends JFrame {
                 p2Tank.shotCounter -= 1;
                 p2Tank.shotTimer = 50;
             }
-//            if (p1Tank.hasPowerUp) {
-//                PowerUp test2 = new PowerUp(p1Tank.getGunX(), p1Tank.getGunY(), PowerUpType.MINE);
-//                this.powerUpsInTheAir.add(test2);
-//                p1Tank.hasPowerUp = false;
-//                p1Tank.hadPowerUp = true;
-//                p1Tank.shotTimer = 50;
-//            } else if (p1Tank.shotTimer == 0 && p1Tank.shotCounter != 0) {
-//                Shot shotP1 = new Shot(p1Tank.getGunX(), p1Tank.getGunY(), (float) p1Tank.getDirection());
-//                this.shotsInTheAir.add(shotP1);
-//                listener.p1Fire = false;
-//                p1Tank.shotCounter -= 1;
-//                p1Tank.shotTimer = 50;
-//            }
         }
     }
 

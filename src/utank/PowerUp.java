@@ -46,12 +46,18 @@ public class PowerUp extends Thing { // PowerUp solely means land mine
         switch (powerUpStatus) {
             case UnPicked:
                 graphics.setColor(Color.blue);
-                graphics.fillOval(this.getRoundedX() , this.getRoundedY(), PowerUp.RADIUS, PowerUp.RADIUS);
+                graphics.fillOval(this.getRoundedX() - PowerUp.RADIUS,
+                        this.getRoundedY() - PowerUp.RADIUS,
+                        PowerUp.RADIUS * 2,
+                        PowerUp.RADIUS * 2);
                 graphics.setColor(Color.black);
                 break;
             case Picked:
                 graphics.setColor(Color.blue);
-                graphics.fillOval(this.carrier.getRoundedX(), this.carrier.getRoundedY(), PowerUp.RADIUS, PowerUp.RADIUS);
+                graphics.fillOval(this.carrier.getRoundedX() - PowerUp.RADIUS,
+                        this.carrier.getRoundedY() - PowerUp.RADIUS,
+                        PowerUp.RADIUS * 2,
+                        PowerUp.RADIUS * 2);
                 graphics.setColor(Color.black);
             case Landed:
                 break;
