@@ -18,6 +18,18 @@ public class GameActionListener extends KeyAdapter {
     }
 
     public GameActionListener(int number) {
+    public void resetVariables() {
+        this.p1Fire = false;
+        this.p1Right = false;
+        this.p1Left = false;
+        this.p1Move = false;
+        this.p2Fire = false;
+        this.p2Right = false;
+        this.p2Left = false;
+        this.p2Move = false;
+    }
+
+    public GameActionListener() {
         super();
         this.number = number;
     }
@@ -155,7 +167,6 @@ public class GameActionListener extends KeyAdapter {
                 break;
         }
     }
-
 
     public void keyReleased(KeyEvent e) {
         switch (this.getNumber()) {

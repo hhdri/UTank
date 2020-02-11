@@ -8,8 +8,6 @@ public class Tank extends MovingThing {
     final static int GUN_LENGTH = 30;
     int shotCounter;
     int shotTimer = 0;
-    boolean hasPowerUp = false;
-    boolean hadPowerUp = false;
     Color color;
 
     Tank(int x, int y, float direction, Color color, int shotCounter) {
@@ -27,15 +25,6 @@ public class Tank extends MovingThing {
                 Tank.RADIUS * 2,
                 Tank.RADIUS * 2
         );
-        if(hasPowerUp) {
-            graphics.setColor(Color.black);
-            graphics.fillOval(
-                    this.getRoundedX() - Tank.RADIUS + 7,
-                    this.getRoundedY() - Tank.RADIUS + 7,
-                    Tank.RADIUS * 2 - 15,
-                    Tank.RADIUS * 2 - 15
-            );
-        }
         graphics.setColor(Color.black);
         graphics.drawOval(
                 this.getRoundedX() - Tank.RADIUS,
