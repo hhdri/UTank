@@ -11,12 +11,14 @@ enum RoundState {
 
 public class Game extends JFrame {
     private final static int WIDTH = 500, HEIGHT = 500;
+    private final static double MINE_FREQUENCY = 0.0007;
     private int map;
     private List<PowerUp> powerUpsInTheAir = new ArrayList<>();
     private List<Thing> everyThing = new ArrayList<>();
     private List<Wall> walls = new ArrayList<>();
     private List<Shot> shotsInTheAir = new ArrayList<>();
     private int winPoint;
+    private int timeToNextMine;
 
     public Game(Player player1, Player player2, int winPoint, int map) {
         this.map = map;
@@ -32,6 +34,9 @@ public class Game extends JFrame {
 
 
     private void newRoundHandler(Player player1, Player player2, RoundState roundState) {
+        timeToNextMine = (int) Math.round(Math.log(1 - Math.random()) / (-MINE_FREQUENCY));
+        System.out.println(timeToNextMine);
+
         if (roundState == RoundState.FirstRound) {
             Map mapWalls = new Map(this.map);
             this.everyThing.addAll(mapWalls.defaultWalls);
@@ -51,10 +56,6 @@ public class Game extends JFrame {
             GameActionListener listener = (GameActionListener) this.getKeyListeners()[0];
             listener.resetVariables();
         }
-
-        int[] powerUpCoordinates = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
-        PowerUp test = new PowerUp(powerUpCoordinates[0], powerUpCoordinates[1]);
-        this.powerUpsInTheAir.add(test);
 
         int player1AddedPoint = 0, player2AddedPoint = 0;
         if (roundState == RoundState.Player1Won)
@@ -90,6 +91,16 @@ public class Game extends JFrame {
     }
 
     public void updateState(Player player1, Player player2) {
+        timeToNextMine--;
+        if (timeToNextMine == 0) {
+            int[] powerUpCoordinates = player1.getCoordinates(everyThing, WIDTH, HEIGHT);
+            PowerUp test = new PowerUp(powerUpCoordinates[0], powerUpCoordinates[1]);
+            this.powerUpsInTheAir.add(test);
+
+            timeToNextMine = (int) Math.round(Math.log(1 - Math.random()) / (-MINE_FREQUENCY));
+            System.out.println(timeToNextMine);
+        }
+
         Tank p1Tank = (Tank) player1.getTank();
         Tank p2Tank = (Tank) player2.getTank();
 
@@ -101,25 +112,32 @@ public class Game extends JFrame {
         }
 
         for (PowerUp powerUp : this.powerUpsInTheAir) {
+            boolean breakFromLoop = false;
             switch (powerUp.powerUpStatus) {
                 case UnPicked:
                     if (powerUp.contacts(p1Tank)) {
                         powerUp.setPicked(p1Tank);
+                        break;
                     }
                     else if (powerUp.contacts(p2Tank)) {
                         powerUp.setPicked(p2Tank);
+                        break;
                     }
                     break;
                 case Landed:
                     if (powerUp.contacts(p1Tank) && !powerUp.carrier.equals(p1Tank)) {
                         this.newRoundHandler(player1, player2, RoundState.Player2Won);
+                        breakFromLoop = true;
                         break;
                     }
                     else if (powerUp.contacts(p2Tank) && !powerUp.carrier.equals(p2Tank)) {
                         this.newRoundHandler(player1, player2, RoundState.Player1Won);
+                        breakFromLoop = true;
                         break;
                     }
             }
+            if (breakFromLoop)
+                break;
         }
         this.powerUpsInTheAir.forEach(PowerUp::growOld);
         this.powerUpsInTheAir.removeIf(PowerUp::isDead);
