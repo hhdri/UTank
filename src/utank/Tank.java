@@ -57,10 +57,16 @@ public class Tank extends MovingThing {
         return Tank.RADIUS;
     }
 
-    boolean contacts(MovingThing moving) {
+    boolean _contacts(MovingThing moving, int alpha) {
         float delta_x = moving.getX() - this.getX();
         float delta_y = moving.getY() - this.getY();
         double distance = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        return distance  < Tank.RADIUS + moving.getRadius();
+        return distance  < Tank.RADIUS + moving.getRadius() + alpha;
+    }
+    boolean contacts(MovingThing movingThing){
+        return _contacts(movingThing, 0);
+    }
+    boolean contacts(MovingThing movingThing, int alpha){
+        return _contacts(movingThing, alpha);
     }
 }

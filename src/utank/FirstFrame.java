@@ -70,6 +70,11 @@ public class FirstFrame {
         enterGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent a) {
+                if (!shotsTextField.getText().matches("\\d+") || !winningTextField.getText().matches("\\d+")) {
+                    JOptionPane.showMessageDialog(jFrame, "Insert correct numbers please.");
+                    return;
+                }
+
                 jFrame.dispose();
                 Player player1 = new Player(playerOneTextField.getText(), Color.gray, Integer.parseInt(shotsTextField.getText()));
                 Player player2 = new Player(playerTwoTextField.getText(), Color.red, Integer.parseInt(shotsTextField.getText()));
