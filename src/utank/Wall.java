@@ -29,7 +29,7 @@ public class Wall extends Thing {
         graphics.fillRect(this.getRoundedX(), this.getRoundedY(), width, height);
     }
 
-    boolean contacts(MovingThing moving) {
+    boolean _contacts(MovingThing moving, int alpha) {
         float repX = 0, repY = 0;
         if (isVertical) {
             if (moving.getY() > Math.min(this.i1, this.i2) && moving.getY() < Math.max(this.i1, this.i2)) {
@@ -59,6 +59,12 @@ public class Wall extends Thing {
                 repX = Math.max(this.i1, this.i2) - 4;
             }
         }
-        return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius()+5;
+        return Math.hypot(repX - moving.getX(), repY - moving.getY()) < moving.getRadius() + alpha;
+    }
+    boolean contacts(MovingThing movingThing) {
+        return _contacts(movingThing, 5);
+    }
+    boolean contacts(MovingThing movingThing, int alpha){
+        return _contacts(movingThing, alpha);
     }
 }
