@@ -4,13 +4,13 @@ import java.awt.*;
 
 public class Shot extends MovingThing {
     private final static int RADIUS = 10;
-    private final static int LIFE = 100;
+    private final static int LIFE = 30;
 
 
     int age;
 
     Shot(int x, int y, float direction) {
-        super(x, y, direction, (float) 10, (float) 1);
+        super(x, y, direction, (float) 15, (float) 4);
         age = Shot.LIFE;
     }
 
