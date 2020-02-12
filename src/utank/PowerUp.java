@@ -67,26 +67,8 @@ public class PowerUp extends Thing { // PowerUp solely means land mine
 
     boolean checkContact(java.util.List<Thing> everything, int[] coords) {
         boolean hasContactWithWall = false;
-        boolean hasContactWithTank = false;
-        boolean hasContactWithPowerUp = false;
-        for (int i = 0; i < everything.size(); i++) {
-            if (everything.get(i) instanceof Tank) {
-                int[] props = {((Tank) everything.get(i)).getRoundedX(), ((Tank) everything.get(i)).getRoundedY(), Tank.RADIUS};
-                int[] borderPointsX = {props[0] - (3) * props[2], props[0] + (3) * props[2]};
-                int[] borderPointsY = {props[1] - (3) * props[2], props[1] + (3) * props[2]};
-                if (borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
-                        borderPointsY[0] <= coords[1] && coords[1] <= borderPointsY[1]) {
-                    hasContactWithTank = true;
-                }
-            } else if (everything.get(i) instanceof PowerUp) {
-                int[] props = {((PowerUp) everything.get(i)).getRoundedX(), ((PowerUp) everything.get(i)).getRoundedY(), ((PowerUp) everything.get(i)).RADIUS};
-                int[] borderPointsX = {props[0] - (3) * props[2], props[0] + (3) * props[2]};
-                int[] borderPointsY = {props[1] - (3) * props[2], props[1] + (3) * props[2]};
-                if (borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
-                        borderPointsY[0] <= coords[1] && coords[1] <= borderPointsY[1]) {
-                    hasContactWithPowerUp = true;
-                }
-            } else {
+        for (int i = 0; i <everything.size() ; i++) {
+            if (everything.get(i) instanceof Wall) {
                 int[] props = {((Wall) everything.get(i)).i1, ((Wall) everything.get(i)).i2,
                         ((Wall) everything.get(i)).j, ((Wall) everything.get(i)).WIDTH};
                 boolean isVert = ((Wall) everything.get(i)).isVertical;
@@ -107,7 +89,7 @@ public class PowerUp extends Thing { // PowerUp solely means land mine
                 }
             }
         }
-        return hasContactWithTank || hasContactWithWall || hasContactWithPowerUp;
+        return hasContactWithWall;
     }
 
     public int[] getCoordinates(List<Thing> everything, int width, int height) {

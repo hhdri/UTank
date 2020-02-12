@@ -63,10 +63,8 @@ public class Game extends JFrame {
         if (roundState == RoundState.Player2Won)
             player2AddedPoint++;
 
-//        int[] coordinatesP1 = player1.getNewTank(everyThing, WIDTH, HEIGHT);
         player1.newRound(player1AddedPoint, player1.getNewTank(everyThing, WIDTH, HEIGHT));
         this.everyThing.add(player1.getTank());
-//        int[] coordinatesP2 = player2.getNewTank(everyThing, WIDTH, HEIGHT);
         player2.newRound(player2AddedPoint, player2.getNewTank(everyThing, WIDTH, HEIGHT));
         this.everyThing.add(player2.getTank());
 
