@@ -12,7 +12,7 @@ public class Rules {
         jFrame.setResizable(false);
 
         JPanel jPanel = new JPanel();
-        JLabel text = new JLabel("The game consists of two tanks...............  Press m for menu");
+        JLabel text = new JLabel("ONLY ONE CAN SURVIVE  ...............  Press M for menu");
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override

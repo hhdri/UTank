@@ -15,19 +15,21 @@ public class FirstFrame {
         jFrame.setBounds(0, 0, 520, 500);
         jFrame.setResizable(false);
         JPanel jPanel = new JPanel();
-        JLabel welcome = new JLabel("Welcome to UTANK. ", SwingConstants.CENTER);
+        JLabel welcome = new JLabel("Welcome to UTANK. ");
         welcome.setBounds(200, 200, 100, 30);
 
         JLabel playerOneLabel = new JLabel("Player 1 : ");
         playerOneLabel.setForeground(Color.GRAY);
         JLabel playerTwoLabel = new JLabel("Player 2 : ");
         playerTwoLabel.setForeground(Color.RED);
-        JLabel winningPointLabel = new JLabel("Winning Point : ", SwingConstants.CENTER);
+        JLabel winningPointLabel = new JLabel("Winning Point : ");
         JLabel shotsLabel = new JLabel("Shots : ");
         JTextField playerOneTextField = new JTextField(5);
         JTextField playerTwoTextField = new JTextField(5);
         JTextField winningTextField = new JTextField(2);
+        winningTextField.setText("5");
         JTextField shotsTextField = new JTextField(2);
+        shotsTextField.setText("10");
         ButtonGroup playerOneButtonGroup = new ButtonGroup();
         ButtonGroup playerTwoButtonGroup = new ButtonGroup();
 
@@ -35,8 +37,10 @@ public class FirstFrame {
         JLabel playerOneKeys = new JLabel("Player1 Keys : ");
         JLabel playerTwoKeys = new JLabel("Player2 Keys : ");
         JRadioButton jRadioButton1 = new JRadioButton("Arrow Keys  ");
+        jRadioButton1.setSelected(true);
         JRadioButton jRadioButton2 = new JRadioButton("J L I K ");
         JRadioButton jRadioButton3 = new JRadioButton("A D W S");
+        jRadioButton3.setSelected(true);
         JRadioButton jRadioButton4 = new JRadioButton("Z C S X");
         playerOneButtonGroup.add(jRadioButton1);
         playerOneButtonGroup.add(jRadioButton2);
