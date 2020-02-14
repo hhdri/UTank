@@ -91,21 +91,7 @@ public abstract class MovingThing extends Thing {
         this.vY = vY1;
     }
 
-    void blockedByBoth(Tank tank, Wall wall) {
-        if (wall.isVertical) {
-            if (this.y < tank.y)
-                this.vY = 0;
-            else
-                tank.vY = 0;
-        } else {
-            if (this.x < tank.x)
-                this.vX = 0;
-            else
-                tank.vX = 0;
-        }
 
-
-    }
 
     public double getDirection() {
         return direction;
