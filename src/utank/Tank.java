@@ -1,7 +1,6 @@
 package utank;
 
 import java.awt.*;
-import java.util.Map;
 
 public class Tank extends MovingThing {
     final static int RADIUS = 25;
