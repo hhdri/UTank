@@ -9,7 +9,7 @@ enum PowerUpStatus {
 
 public class PowerUp extends Thing { // PowerUp solely means land mine
     final static int RADIUS = 10;
-    final static int LIFE = 1000;
+    final static int LIFE = 500;
     int age;
     PowerUpStatus powerUpStatus;
     Tank carrier;
@@ -22,25 +22,23 @@ public class PowerUp extends Thing { // PowerUp solely means land mine
 
     void setPicked(Tank carrier) {
         this.powerUpStatus = PowerUpStatus.Picked;
+        this.age = LIFE - 200;
         this.carrier = carrier;
     }
 
     void setLanded () {
         this.powerUpStatus = PowerUpStatus.Landed;
+        this.age = LIFE;
         this.x = this.carrier.getRoundedX();
         this.y = this.carrier.getRoundedY();
     }
 
     void growOld() {
-        if (powerUpStatus == PowerUpStatus.Picked)
-            this.age = this.age - 1;
+        this.age -= 1;
     }
 
     boolean isDead() {
-        if (powerUpStatus == PowerUpStatus.Picked)
-            return this.age == 0;
-        else
-            return false;
+        return this.age == 0;
     }
 
     void draw(Graphics graphics) {
