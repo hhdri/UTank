@@ -78,8 +78,8 @@ public class PowerUp extends Thing { // PowerUp solely means land mine
                         hasContactWithWall = true;
                     }
                 } else {
-                    int[] borderPointsY = {props[2] - (10) * props[3], props[2] + (10) * props[3]};
-                    int[] borderPointsX = {props[0] - (10) * props[3], props[1] + (10) * props[3]};
+                    int[] borderPointsY = {props[2] - (25) * props[3], props[2] + (25) * props[3]};
+                    int[] borderPointsX = {props[0] - (25) * props[3], props[1] + (25) * props[3]};
                     if (borderPointsX[0] <= coords[0] && coords[0] <= borderPointsX[1] &&
                             borderPointsY[0] <= coords[1] && coords[1] <= borderPointsY[1]) {
                         hasContactWithWall = true;
