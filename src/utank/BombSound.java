@@ -7,7 +7,9 @@ public class BombSound {
     public BombSound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("wav.wav").getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
+            AudioFormat format = audioInputStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(audioInputStream);
             clip.start();
         } catch (Exception ex) {
